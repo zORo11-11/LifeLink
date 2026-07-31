@@ -14,7 +14,9 @@ const DonorRegister = () => {
     bloodGroup: '',
     allergies: '',
     conditions: '',
-    lastDonation: ''
+    lastDonation: '',
+    password: '',
+    confirmPassword: ''
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -42,25 +44,47 @@ const DonorRegister = () => {
     
     if (!formData.address) newErrors.address = 'Residential address is required';
     if (!formData.bloodGroup) newErrors.bloodGroup = 'Blood group is required';
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      setLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setLoading(false);
-        setSuccess(true);
-        setTimeout(() => {
-          navigate('/login/donor');
-        }, 1500);
-      }, 1000);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setErrors({});
+
+  try {
+    const response = await fetch('http://localhost:5000/api/donors/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || 'Registration failed');
     }
-  };
+
+    setSuccess(true);
+    setTimeout(() => {
+      navigate('/donor/login');
+    }, 2000);
+
+  } catch (err) {
+    setErrors({ server: err.message });
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -170,7 +194,31 @@ const DonorRegister = () => {
               </select>
               {errors.bloodGroup && <p className="text-red-500 text-xs mt-1">{errors.bloodGroup}</p>}
             </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <FormInput
+                label="Password"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                error={errors.password}
+                required
+                placeholder="••••••••"
+                theme="admin"
+              />
 
+              <FormInput
+                label="Confirm Password"
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                error={errors.confirmPassword}
+                required
+                placeholder="••••••••"
+                theme="admin"
+              />
+            </div>
             <FormInput
               label="Known Allergies (Optional)"
               name="allergies"

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import FormInput from '../components/FormInput';
-import Button from '../components/Button';
 
 const HospitalRegister = () => {
   const navigate = useNavigate();
@@ -14,68 +12,84 @@ const HospitalRegister = () => {
     confirmPassword: '',
     address: '',
     city: '',
-    lat: '',
-    lng: ''
+    phone: ''
   });
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.hospitalName) newErrors.hospitalName = 'Hospital name is required';
     if (!formData.licenseId) newErrors.licenseId = 'License ID is required';
     if (!formData.adminName) newErrors.adminName = 'Admin name is required';
-    
+
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email format is invalid';
     }
-    
+
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
+
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-    
+
     if (!formData.address) newErrors.address = 'Address is required';
     if (!formData.city) newErrors.city = 'City is required';
-    if (!formData.lat) newErrors.lat = 'Latitude is required';
-    if (!formData.lng) newErrors.lng = 'Longitude is required';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      setLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setLoading(false);
-        setSuccess(true);
-        setTimeout(() => {
-          navigate('/login/hospital');
-        }, 1500);
-      }, 1000);
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      setLoading(true);
+
+      try {
+        const response = await fetch('http://localhost:5000/api/hospitals/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          setLoading(false);
+          setSuccess(true);
+          setTimeout(() => {
+            navigate('/login/hospital');
+          }, 1500);
+        } else {
+          setLoading(false);
+          alert(data.message || 'Hospital registration failed.');
+        }
+      } catch (error) {
+        setLoading(false);
+        console.error('Registration error:', error);
+        alert('Cannot connect to server. Ensure backend is running at http://localhost:5000');
+      }
+    }
   };
 
   return (
@@ -92,150 +106,167 @@ const HospitalRegister = () => {
           </div>
 
           {success && (
-            <div className="mb-4 p-3 bg-[#16A34A] bg-opacity-10 border border-[#16A34A] text-[#16A34A] rounded-lg text-center">
+            <div className="mb-4 p-3 bg-green-500 bg-opacity-10 border border-green-500 text-green-700 rounded-lg text-center">
               Registration successful! Redirecting to login...
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-4">
-              <FormInput
-                label="Hospital Name"
-                name="hospitalName"
-                value={formData.hospitalName}
-                onChange={handleChange}
-                error={errors.hospitalName}
-                required
-                placeholder="City General Hospital"
-                theme="admin"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Hospital Name *
+                </label>
+                <input
+                  type="text"
+                  name="hospitalName"
+                  value={formData.hospitalName}
+                  onChange={handleChange}
+                  placeholder="City General Hospital"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.hospitalName && <p className="text-red-500 text-xs mt-1">{errors.hospitalName}</p>}
+              </div>
 
-              <FormInput
-                label="Official License / Registration ID"
-                name="licenseId"
-                value={formData.licenseId}
-                onChange={handleChange}
-                error={errors.licenseId}
-                required
-                placeholder="HOSP-12345"
-                theme="admin"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  License / Reg ID *
+                </label>
+                <input
+                  type="text"
+                  name="licenseId"
+                  value={formData.licenseId}
+                  onChange={handleChange}
+                  placeholder="HOSP-12345"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.licenseId && <p className="text-red-500 text-xs mt-1">{errors.licenseId}</p>}
+              </div>
             </div>
-
-            <FormInput
-              label="Admin Full Name"
-              name="adminName"
-              value={formData.adminName}
-              onChange={handleChange}
-              error={errors.adminName}
-              required
-              placeholder="Dr. John Smith"
-              theme="admin"
-            />
-
-            <FormInput
-              label="Official Contact Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              error={errors.email}
-              required
-              placeholder="admin@hospital.com"
-              theme="admin"
-            />
 
             <div className="grid md:grid-cols-2 gap-4">
-              <FormInput
-                label="Password"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                error={errors.password}
-                required
-                placeholder="••••••••"
-                theme="admin"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Admin Full Name *
+                </label>
+                <input
+                  type="text"
+                  name="adminName"
+                  value={formData.adminName}
+                  onChange={handleChange}
+                  placeholder="Dr. Jane Smith"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.adminName && <p className="text-red-500 text-xs mt-1">{errors.adminName}</p>}
+              </div>
 
-              <FormInput
-                label="Confirm Password"
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                error={errors.confirmPassword}
-                required
-                placeholder="••••••••"
-                theme="admin"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Official Email *
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="admin@hospital.com"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              </div>
             </div>
 
-            <FormInput
-              label="Full Hospital Address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              error={errors.address}
-              required
-              placeholder="123 Medical Drive, Suite 100"
-              theme="admin"
-            />
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Password *
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
+              </div>
 
-            <div className="grid md:grid-cols-3 gap-4">
-              <FormInput
-                label="City"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                error={errors.city}
-                required
-                placeholder="New York"
-                theme="admin"
-              />
-
-              <FormInput
-                label="Latitude"
-                type="number"
-                name="lat"
-                value={formData.lat}
-                onChange={handleChange}
-                error={errors.lat}
-                required
-                placeholder="40.7128"
-                theme="admin"
-              />
-
-              <FormInput
-                label="Longitude"
-                type="number"
-                name="lng"
-                value={formData.lng}
-                onChange={handleChange}
-                error={errors.lng}
-                required
-                placeholder="-74.0060"
-                theme="admin"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Confirm Password *
+                </label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
+              </div>
             </div>
 
-            <Button 
-              type="submit" 
-              variant="admin" 
-              loading={loading}
-              className="w-full"
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Address *
+              </label>
+              <input
+                type="text"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+                placeholder="123 Medical Center Drive"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  City *
+                </label>
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  placeholder="New York"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+1 555-0199"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-200 disabled:opacity-50"
             >
-              Register Hospital Account
-            </Button>
+              {loading ? 'Registering...' : 'Register Hospital Account'}
+            </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Already registered?{' '}
-              <Link 
-                to="/login/hospital" 
-                className="font-medium text-[#2563EB] hover:text-[#1D4ED8] transition-colors"
-              >
+              <Link to="/login/hospital" className="font-medium text-blue-600 hover:underline">
                 Login Here
               </Link>
             </p>

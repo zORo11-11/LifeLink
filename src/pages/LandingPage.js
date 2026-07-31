@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Card from '../components/Card';
-
+import Footer from '../components/Footer';
 const LandingPage = () => {
   return (
     <div className="min-h-screen bg-white">
@@ -40,7 +40,7 @@ const LandingPage = () => {
             {/* Admin Portal Card */}
             <div className="bg-white rounded-xl shadow-lg p-8 text-center border-2 border-transparent hover:border-[#2563EB] transition-all group">
               <div className="text-5xl mb-4">🏢</div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Admin Portal</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Hospital Admins</h3>
               <p className="text-gray-600 mb-6">
                 Hospital administrators can manage organ requests, blood sourcing, and patient records.
               </p>
@@ -63,7 +63,7 @@ const LandingPage = () => {
             {/* Donor Portal Card */}
             <div className="bg-white rounded-xl shadow-lg p-8 text-center border-2 border-transparent hover:border-[#DC2626] transition-all group">
               <div className="text-5xl mb-4">🩸</div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-3">Donor Portal</h3>
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">Donor</h3>
               <p className="text-gray-600 mb-6">
                 Blood donors can manage their profiles, view donation history, and respond to urgent requests.
               </p>
@@ -88,10 +88,11 @@ const LandingPage = () => {
       </section>
 
       {/* System Overview Section */}
-      <section className="bg-white py-16">
+      <section className="bg-[#2563EB] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
-            System Overview
+          <h2 className="text-3xl font-bold text-center text-black.0
+          -800 mb-12">
+            What LifeLink does
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card 
@@ -117,6 +118,11 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+      <section className="bg-[#2563EB] py-16">
+        <div>
+          <Footer/>
+        </div>
+</section>
     </div>
   );
 };

@@ -23949,6 +23949,11 @@ var _donorLogin = require("./pages/DonorLogin");
 var _donorLoginDefault = parcelHelpers.interopDefault(_donorLogin);
 var _donorRegister = require("./pages/DonorRegister");
 var _donorRegisterDefault = parcelHelpers.interopDefault(_donorRegister);
+// Dashboard Placeholders
+var _donorDashboard = require("./pages/DonorDashboard");
+var _donorDashboardDefault = parcelHelpers.interopDefault(_donorDashboard);
+var _hospitalDashboard = require("./pages/HospitalDashboard");
+var _hospitalDashboardDefault = parcelHelpers.interopDefault(_hospitalDashboard);
 function App() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "min-h-screen",
@@ -23958,71 +23963,95 @@ function App() {
                     path: "/",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _landingPageDefault.default), {}, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 13,
+                        lineNumber: 17,
                         columnNumber: 34
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.js",
-                    lineNumber: 13,
+                    lineNumber: 17,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/login/hospital",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _hospitalLoginDefault.default), {}, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 14,
+                        lineNumber: 18,
                         columnNumber: 48
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.js",
-                    lineNumber: 14,
+                    lineNumber: 18,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/register/hospital",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _hospitalRegisterDefault.default), {}, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 15,
+                        lineNumber: 19,
                         columnNumber: 51
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.js",
-                    lineNumber: 15,
+                    lineNumber: 19,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/login/donor",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _donorLoginDefault.default), {}, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 16,
+                        lineNumber: 20,
                         columnNumber: 45
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.js",
-                    lineNumber: 16,
+                    lineNumber: 20,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                     path: "/register/donor",
                     element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _donorRegisterDefault.default), {}, void 0, false, {
                         fileName: "src/App.js",
-                        lineNumber: 17,
+                        lineNumber: 21,
                         columnNumber: 48
                     }, void 0)
                 }, void 0, false, {
                     fileName: "src/App.js",
-                    lineNumber: 17,
+                    lineNumber: 21,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                    path: "/dashboard/donor",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _donorDashboardDefault.default), {}, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 24,
+                        columnNumber: 49
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "src/App.js",
+                    lineNumber: 24,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
+                    path: "/dashboard/hospital",
+                    element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _hospitalDashboardDefault.default), {}, void 0, false, {
+                        fileName: "src/App.js",
+                        lineNumber: 25,
+                        columnNumber: 52
+                    }, void 0)
+                }, void 0, false, {
+                    fileName: "src/App.js",
+                    lineNumber: 25,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/App.js",
-            lineNumber: 12,
+            lineNumber: 16,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/App.js",
-        lineNumber: 11,
+        lineNumber: 15,
         columnNumber: 5
     }, this);
 }
@@ -24036,7 +24065,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./pages/LandingPage":"9CeCW","./pages/HospitalLogin":"7zr5N","./pages/HospitalRegister":"2CPKO","./pages/DonorLogin":"aFTvt","./pages/DonorRegister":"9lhrQ","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"9CeCW":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","./pages/LandingPage":"9CeCW","./pages/HospitalLogin":"7zr5N","./pages/HospitalRegister":"2CPKO","./pages/DonorLogin":"aFTvt","./pages/DonorRegister":"9lhrQ","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./pages/DonorDashboard":"gDUXy","./pages/HospitalDashboard":"axijR"}],"9CeCW":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$31dd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$31dd.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -24054,6 +24083,8 @@ var _navbar = require("../components/Navbar");
 var _navbarDefault = parcelHelpers.interopDefault(_navbar);
 var _card = require("../components/Card");
 var _cardDefault = parcelHelpers.interopDefault(_card);
+var _footer = require("../components/Footer");
+var _footerDefault = parcelHelpers.interopDefault(_footer);
 const LandingPage = ()=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "min-h-screen bg-white",
@@ -24162,7 +24193,7 @@ const LandingPage = ()=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                                             className: "text-2xl font-bold text-gray-800 mb-3",
-                                            children: "Admin Portal"
+                                            children: "Hospital Admins"
                                         }, void 0, false, {
                                             fileName: "src/pages/LandingPage.js",
                                             lineNumber: 43,
@@ -24222,7 +24253,7 @@ const LandingPage = ()=>{
                                         }, undefined),
                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                                             className: "text-2xl font-bold text-gray-800 mb-3",
-                                            children: "Donor Portal"
+                                            children: "Donor"
                                         }, void 0, false, {
                                             fileName: "src/pages/LandingPage.js",
                                             lineNumber: 66,
@@ -24287,13 +24318,13 @@ const LandingPage = ()=>{
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
-                className: "bg-white py-16",
+                className: "bg-[#2563EB] py-16",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
                     children: [
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                            className: "text-3xl font-bold text-center text-gray-800 mb-12",
-                            children: "System Overview"
+                            className: "text-3xl font-bold text-center text-black.0 -800 mb-12",
+                            children: "What LifeLink does"
                         }, void 0, false, {
                             fileName: "src/pages/LandingPage.js",
                             lineNumber: 93,
@@ -24308,7 +24339,7 @@ const LandingPage = ()=>{
                                     description: "Real-time location matching with instant donor contact details for emergency situations."
                                 }, void 0, false, {
                                     fileName: "src/pages/LandingPage.js",
-                                    lineNumber: 97,
+                                    lineNumber: 98,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
@@ -24317,7 +24348,7 @@ const LandingPage = ()=>{
                                     description: "Automated validation of priority scores against objective lab vitals to ensure fair allocation."
                                 }, void 0, false, {
                                     fileName: "src/pages/LandingPage.js",
-                                    lineNumber: 102,
+                                    lineNumber: 103,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
@@ -24326,7 +24357,7 @@ const LandingPage = ()=>{
                                     description: "Automated matching using urgency, proximity, and ischemic decay metrics for optimal organ distribution."
                                 }, void 0, false, {
                                     fileName: "src/pages/LandingPage.js",
-                                    lineNumber: 107,
+                                    lineNumber: 108,
                                     columnNumber: 13
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _cardDefault.default), {
@@ -24335,13 +24366,13 @@ const LandingPage = ()=>{
                                     description: "Automated 8-week donation eligibility checks to ensure donor health and safety."
                                 }, void 0, false, {
                                     fileName: "src/pages/LandingPage.js",
-                                    lineNumber: 112,
+                                    lineNumber: 113,
                                     columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/LandingPage.js",
-                            lineNumber: 96,
+                            lineNumber: 97,
                             columnNumber: 11
                         }, undefined)
                     ]
@@ -24353,6 +24384,24 @@ const LandingPage = ()=>{
             }, void 0, false, {
                 fileName: "src/pages/LandingPage.js",
                 lineNumber: 91,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("section", {
+                className: "bg-[#2563EB] py-16",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _footerDefault.default), {}, void 0, false, {
+                        fileName: "src/pages/LandingPage.js",
+                        lineNumber: 123,
+                        columnNumber: 11
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/pages/LandingPage.js",
+                    lineNumber: 122,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/pages/LandingPage.js",
+                lineNumber: 121,
                 columnNumber: 7
             }, undefined)
         ]
@@ -24372,7 +24421,7 @@ $RefreshReg$(_c, "LandingPage");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/Navbar":"99RRu","../components/Card":"lDuos","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"99RRu":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/Navbar":"99RRu","../components/Card":"lDuos","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../components/Footer":"lq1kZ"}],"99RRu":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$eca0 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$eca0.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -26883,6 +26932,281 @@ $RefreshReg$(_c, "Card");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"lq1kZ":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$a646 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$a646.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$a646.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const Footer = ()=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("footer", {
+        className: "bg-slate-900 text-slate-300 py-12 border-t border-slate-800",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "max-w-7xl w-full px-4 sm:px-6 lg:px-8",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "grid grid-cols-1 md:grid-cols-4 gap-8 mb-8",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "col-span-1 md:col-span-1",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
+                                className: "text-2xl font-bold text-sky-400 mb-3 flex items-center",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                        className: "mr-2",
+                                        children: "\uD83E\uDE7A"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 10,
+                                        columnNumber: 15
+                                    }, undefined),
+                                    "LifeLink"
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/Footer.js",
+                                lineNumber: 9,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                className: "text-sm text-slate-400",
+                                children: "Connecting Hospitals with active blood donors and making organ donation simpler and quicker"
+                            }, void 0, false, {
+                                fileName: "src/components/Footer.js",
+                                lineNumber: 12,
+                                columnNumber: 13
+                            }, undefined)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/Footer.js",
+                        lineNumber: 8,
+                        columnNumber: 11
+                    }, undefined)
+                }, void 0, false, {
+                    fileName: "src/components/Footer.js",
+                    lineNumber: 7,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
+                            className: "text-white font-semibold mb-3",
+                            children: "Quick Links"
+                        }, void 0, false, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 19,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                            className: "space-y-2 text-sm",
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        href: "#overview",
+                                        className: "hover:text-sky-400 transition-colors",
+                                        children: "System overview"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 21,
+                                        columnNumber: 17
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 21,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        href: "#hospitals",
+                                        className: "hover:text-sky-400 transition-colors",
+                                        children: "Hospitals"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 22,
+                                        columnNumber: 17
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 22,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        href: "#about",
+                                        className: "hover:text-sky-400 transition-colors",
+                                        children: "About"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 23,
+                                        columnNumber: 17
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 23,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        href: "#contact",
+                                        className: "hover:text-sky-400 transition-colors",
+                                        children: "Contact Us"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 24,
+                                        columnNumber: 17
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 24,
+                                    columnNumber: 13
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 20,
+                            columnNumber: 11
+                        }, undefined)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/Footer.js",
+                    lineNumber: 18,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 28,
+                            columnNumber: 14
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h4", {
+                            className: "text-white font-semibold mb-3",
+                            children: "User Portals"
+                        }, void 0, false, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 29,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("ul", {
+                            className: "space-y-2 text-sm",
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        href: "/login/hospital",
+                                        className: "hover:text-sky-400 transition-colors",
+                                        children: "Hospital Admin Login"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 31,
+                                        columnNumber: 17
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 31,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("li", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                        href: "/login/donor",
+                                        className: "hover:text-sky-400 transition-colors",
+                                        children: "Blood Donor Login"
+                                    }, void 0, false, {
+                                        fileName: "src/components/Footer.js",
+                                        lineNumber: 32,
+                                        columnNumber: 17
+                                    }, undefined)
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 32,
+                                    columnNumber: 13
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 30,
+                            columnNumber: 11
+                        }, undefined)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/Footer.js",
+                    lineNumber: 28,
+                    columnNumber: 9
+                }, undefined),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    className: "pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                            children: [
+                                "\xa9 ",
+                                new Date().getFullYear(),
+                                " LifeLink Health Systems. All rights reserved."
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 37,
+                            columnNumber: 11
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "flex gap-4",
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                    href: "/privacy",
+                                    className: "hover:text-slate-400",
+                                    children: "Privacy Policy"
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 39,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("a", {
+                                    href: "/terms",
+                                    className: "hover:text-slate-400",
+                                    children: "Terms of Service"
+                                }, void 0, false, {
+                                    fileName: "src/components/Footer.js",
+                                    lineNumber: 40,
+                                    columnNumber: 13
+                                }, undefined)
+                            ]
+                        }, void 0, true, {
+                            fileName: "src/components/Footer.js",
+                            lineNumber: 38,
+                            columnNumber: 11
+                        }, undefined)
+                    ]
+                }, void 0, true, {
+                    fileName: "src/components/Footer.js",
+                    lineNumber: 36,
+                    columnNumber: 9
+                }, undefined)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/Footer.js",
+            lineNumber: 6,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/Footer.js",
+        lineNumber: 5,
+        columnNumber: 5
+    }, undefined);
+};
+_c = Footer;
+exports.default = Footer;
+var _c;
+$RefreshReg$(_c, "Footer");
+
+  $parcel$ReactRefreshHelpers$a646.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
 },{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"7zr5N":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$849b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$849b.init();
@@ -26922,18 +27246,40 @@ const HospitalLogin = ()=>{
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
         if (validateForm()) {
             setLoading(true);
-            // Simulate API call
-            setTimeout(()=>{
+            try {
+                const response = await fetch('http://localhost:5000/api/hospitals/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formData.email,
+                        password: formData.password
+                    })
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    setLoading(false);
+                    setSuccess(true);
+                    // Save session data
+                    localStorage.setItem('hospital', JSON.stringify(data.hospital));
+                    // Redirect to Hospital Dashboard
+                    setTimeout(()=>{
+                        navigate('/dashboard/hospital');
+                    }, 1200);
+                } else {
+                    setLoading(false);
+                    alert(data.message || 'Invalid email or password.');
+                }
+            } catch (error) {
                 setLoading(false);
-                setSuccess(true);
-                setTimeout(()=>{
-                    navigate('/');
-                }, 1500);
-            }, 1000);
+                console.error('Login error:', error);
+                alert('Cannot connect to server. Check if backend is running.');
+            }
         }
     };
     const handleChange = (e)=>{
@@ -26958,7 +27304,7 @@ const HospitalLogin = ()=>{
                                 children: "Hospital Admin Login"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalLogin.js",
-                                lineNumber: 64,
+                                lineNumber: 90,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -26966,13 +27312,13 @@ const HospitalLogin = ()=>{
                                 children: "Access your hospital administration portal"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalLogin.js",
-                                lineNumber: 67,
+                                lineNumber: 93,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalLogin.js",
-                        lineNumber: 63,
+                        lineNumber: 89,
                         columnNumber: 11
                     }, undefined),
                     success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -26980,7 +27326,7 @@ const HospitalLogin = ()=>{
                         children: "Login successful! Redirecting..."
                     }, void 0, false, {
                         fileName: "src/pages/HospitalLogin.js",
-                        lineNumber: 73,
+                        lineNumber: 99,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -26999,7 +27345,7 @@ const HospitalLogin = ()=>{
                                 theme: "admin"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalLogin.js",
-                                lineNumber: 79,
+                                lineNumber: 105,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -27014,7 +27360,7 @@ const HospitalLogin = ()=>{
                                 theme: "admin"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalLogin.js",
-                                lineNumber: 91,
+                                lineNumber: 117,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27032,7 +27378,7 @@ const HospitalLogin = ()=>{
                                                 className: "h-4 w-4 text-[#2563EB] focus:ring-[#60A5FA] border-[#CBD5E1] rounded"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalLogin.js",
-                                                lineNumber: 105,
+                                                lineNumber: 131,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -27041,13 +27387,13 @@ const HospitalLogin = ()=>{
                                                 children: "Remember Me"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalLogin.js",
-                                                lineNumber: 113,
+                                                lineNumber: 139,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalLogin.js",
-                                        lineNumber: 104,
+                                        lineNumber: 130,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27056,13 +27402,13 @@ const HospitalLogin = ()=>{
                                         children: "Forgot Password?"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalLogin.js",
-                                        lineNumber: 117,
+                                        lineNumber: 143,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalLogin.js",
-                                lineNumber: 103,
+                                lineNumber: 129,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
@@ -27073,13 +27419,13 @@ const HospitalLogin = ()=>{
                                 children: "Login as Hospital Admin"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalLogin.js",
-                                lineNumber: 125,
+                                lineNumber: 151,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalLogin.js",
-                        lineNumber: 78,
+                        lineNumber: 104,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27095,34 +27441,34 @@ const HospitalLogin = ()=>{
                                     children: "Register Here"
                                 }, void 0, false, {
                                     fileName: "src/pages/HospitalLogin.js",
-                                    lineNumber: 138,
+                                    lineNumber: 164,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/HospitalLogin.js",
-                            lineNumber: 136,
+                            lineNumber: 162,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/pages/HospitalLogin.js",
-                        lineNumber: 135,
+                        lineNumber: 161,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/HospitalLogin.js",
-                lineNumber: 62,
+                lineNumber: 88,
                 columnNumber: 9
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/HospitalLogin.js",
-            lineNumber: 61,
+            lineNumber: 87,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/pages/HospitalLogin.js",
-        lineNumber: 60,
+        lineNumber: 86,
         columnNumber: 5
     }, undefined);
 };
@@ -27274,10 +27620,6 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactRouterDom = require("react-router-dom");
-var _formInput = require("../components/FormInput");
-var _formInputDefault = parcelHelpers.interopDefault(_formInput);
-var _button = require("../components/Button");
-var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _s = $RefreshSig$();
 const HospitalRegister = ()=>{
     _s();
@@ -27291,8 +27633,7 @@ const HospitalRegister = ()=>{
         confirmPassword: '',
         address: '',
         city: '',
-        lat: '',
-        lng: ''
+        phone: ''
     });
     const [errors, setErrors] = (0, _react.useState)({});
     const [loading, setLoading] = (0, _react.useState)(false);
@@ -27310,24 +27651,8 @@ const HospitalRegister = ()=>{
         else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
         if (!formData.address) newErrors.address = 'Address is required';
         if (!formData.city) newErrors.city = 'City is required';
-        if (!formData.lat) newErrors.lat = 'Latitude is required';
-        if (!formData.lng) newErrors.lng = 'Longitude is required';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
-    };
-    const handleSubmit = (e)=>{
-        e.preventDefault();
-        if (validateForm()) {
-            setLoading(true);
-            // Simulate API call
-            setTimeout(()=>{
-                setLoading(false);
-                setSuccess(true);
-                setTimeout(()=>{
-                    navigate('/login/hospital');
-                }, 1500);
-            }, 1000);
-        }
     };
     const handleChange = (e)=>{
         const { name, value } = e.target;
@@ -27335,6 +27660,36 @@ const HospitalRegister = ()=>{
                 ...prev,
                 [name]: value
             }));
+    };
+    const handleSubmit = async (e)=>{
+        e.preventDefault();
+        if (validateForm()) {
+            setLoading(true);
+            try {
+                const response = await fetch('http://localhost:5000/api/hospitals/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    setLoading(false);
+                    setSuccess(true);
+                    setTimeout(()=>{
+                        navigate('/login/hospital');
+                    }, 1500);
+                } else {
+                    setLoading(false);
+                    alert(data.message || 'Hospital registration failed.');
+                }
+            } catch (error) {
+                setLoading(false);
+                console.error('Registration error:', error);
+                alert('Cannot connect to server. Ensure backend is running at http://localhost:5000');
+            }
+        }
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "min-h-screen bg-[#F8FAFC] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8",
@@ -27351,7 +27706,7 @@ const HospitalRegister = ()=>{
                                 children: "Register Hospital Account"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 86,
+                                lineNumber: 100,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -27359,21 +27714,21 @@ const HospitalRegister = ()=>{
                                 children: "Create your hospital administration account"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 89,
+                                lineNumber: 103,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalRegister.js",
-                        lineNumber: 85,
+                        lineNumber: 99,
                         columnNumber: 11
                     }, undefined),
                     success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "mb-4 p-3 bg-[#16A34A] bg-opacity-10 border border-[#16A34A] text-[#16A34A] rounded-lg text-center",
+                        className: "mb-4 p-3 bg-green-500 bg-opacity-10 border border-green-500 text-green-700 rounded-lg text-center",
                         children: "Registration successful! Redirecting to login..."
                     }, void 0, false, {
                         fileName: "src/pages/HospitalRegister.js",
-                        lineNumber: 95,
+                        lineNumber: 109,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -27383,190 +27738,369 @@ const HospitalRegister = ()=>{
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: "grid md:grid-cols-2 gap-4",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "Hospital Name",
-                                        name: "hospitalName",
-                                        value: formData.hospitalName,
-                                        onChange: handleChange,
-                                        error: errors.hospitalName,
-                                        required: true,
-                                        placeholder: "City General Hospital",
-                                        theme: "admin"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Hospital Name *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 117,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "text",
+                                                name: "hospitalName",
+                                                value: formData.hospitalName,
+                                                onChange: handleChange,
+                                                placeholder: "City General Hospital",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 120,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.hospitalName && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.hospitalName
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 128,
+                                                columnNumber: 41
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 102,
+                                        lineNumber: 116,
                                         columnNumber: 15
                                     }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "Official License / Registration ID",
-                                        name: "licenseId",
-                                        value: formData.licenseId,
-                                        onChange: handleChange,
-                                        error: errors.licenseId,
-                                        required: true,
-                                        placeholder: "HOSP-12345",
-                                        theme: "admin"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "License / Reg ID *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 132,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "text",
+                                                name: "licenseId",
+                                                value: formData.licenseId,
+                                                onChange: handleChange,
+                                                placeholder: "HOSP-12345",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 135,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.licenseId && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.licenseId
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 143,
+                                                columnNumber: 38
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 113,
+                                        lineNumber: 131,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 101,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                label: "Admin Full Name",
-                                name: "adminName",
-                                value: formData.adminName,
-                                onChange: handleChange,
-                                error: errors.adminName,
-                                required: true,
-                                placeholder: "Dr. John Smith",
-                                theme: "admin"
-                            }, void 0, false, {
-                                fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 125,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                label: "Official Contact Email",
-                                type: "email",
-                                name: "email",
-                                value: formData.email,
-                                onChange: handleChange,
-                                error: errors.email,
-                                required: true,
-                                placeholder: "admin@hospital.com",
-                                theme: "admin"
-                            }, void 0, false, {
-                                fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 136,
+                                lineNumber: 115,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: "grid md:grid-cols-2 gap-4",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "Password",
-                                        type: "password",
-                                        name: "password",
-                                        value: formData.password,
-                                        onChange: handleChange,
-                                        error: errors.password,
-                                        required: true,
-                                        placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
-                                        theme: "admin"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Admin Full Name *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 149,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "text",
+                                                name: "adminName",
+                                                value: formData.adminName,
+                                                onChange: handleChange,
+                                                placeholder: "Dr. Jane Smith",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 152,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.adminName && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.adminName
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 160,
+                                                columnNumber: 38
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 149,
+                                        lineNumber: 148,
                                         columnNumber: 15
                                     }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "Confirm Password",
-                                        type: "password",
-                                        name: "confirmPassword",
-                                        value: formData.confirmPassword,
-                                        onChange: handleChange,
-                                        error: errors.confirmPassword,
-                                        required: true,
-                                        placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
-                                        theme: "admin"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Official Email *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 164,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "email",
+                                                name: "email",
+                                                value: formData.email,
+                                                onChange: handleChange,
+                                                placeholder: "admin@hospital.com",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 167,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.email && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.email
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 175,
+                                                columnNumber: 34
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 161,
+                                        lineNumber: 163,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 148,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                label: "Full Hospital Address",
-                                name: "address",
-                                value: formData.address,
-                                onChange: handleChange,
-                                error: errors.address,
-                                required: true,
-                                placeholder: "123 Medical Drive, Suite 100",
-                                theme: "admin"
-                            }, void 0, false, {
-                                fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 174,
+                                lineNumber: 147,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "grid md:grid-cols-3 gap-4",
+                                className: "grid md:grid-cols-2 gap-4",
                                 children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "City",
-                                        name: "city",
-                                        value: formData.city,
-                                        onChange: handleChange,
-                                        error: errors.city,
-                                        required: true,
-                                        placeholder: "New York",
-                                        theme: "admin"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Password *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 181,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "password",
+                                                name: "password",
+                                                value: formData.password,
+                                                onChange: handleChange,
+                                                placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 184,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.password && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.password
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 192,
+                                                columnNumber: 37
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 186,
+                                        lineNumber: 180,
                                         columnNumber: 15
                                     }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "Latitude",
-                                        type: "number",
-                                        name: "lat",
-                                        value: formData.lat,
-                                        onChange: handleChange,
-                                        error: errors.lat,
-                                        required: true,
-                                        placeholder: "40.7128",
-                                        theme: "admin"
-                                    }, void 0, false, {
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Confirm Password *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 196,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "password",
+                                                name: "confirmPassword",
+                                                value: formData.confirmPassword,
+                                                onChange: handleChange,
+                                                placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 199,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.confirmPassword && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.confirmPassword
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 207,
+                                                columnNumber: 44
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
                                         fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 197,
-                                        columnNumber: 15
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                        label: "Longitude",
-                                        type: "number",
-                                        name: "lng",
-                                        value: formData.lng,
-                                        onChange: handleChange,
-                                        error: errors.lng,
-                                        required: true,
-                                        placeholder: "-74.0060",
-                                        theme: "admin"
-                                    }, void 0, false, {
-                                        fileName: "src/pages/HospitalRegister.js",
-                                        lineNumber: 209,
+                                        lineNumber: 195,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 185,
+                                lineNumber: 179,
                                 columnNumber: 13
                             }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                        className: "block text-sm font-medium text-gray-700 mb-1",
+                                        children: "Full Address *"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/HospitalRegister.js",
+                                        lineNumber: 212,
+                                        columnNumber: 15
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        type: "text",
+                                        name: "address",
+                                        value: formData.address,
+                                        onChange: handleChange,
+                                        placeholder: "123 Medical Center Drive",
+                                        className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/HospitalRegister.js",
+                                        lineNumber: 215,
+                                        columnNumber: 15
+                                    }, undefined),
+                                    errors.address && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "text-red-500 text-xs mt-1",
+                                        children: errors.address
+                                    }, void 0, false, {
+                                        fileName: "src/pages/HospitalRegister.js",
+                                        lineNumber: 223,
+                                        columnNumber: 34
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/HospitalRegister.js",
+                                lineNumber: 211,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "grid md:grid-cols-2 gap-4",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "City *"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 228,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "text",
+                                                name: "city",
+                                                value: formData.city,
+                                                onChange: handleChange,
+                                                placeholder: "New York",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 231,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            errors.city && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                className: "text-red-500 text-xs mt-1",
+                                                children: errors.city
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 239,
+                                                columnNumber: 33
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/HospitalRegister.js",
+                                        lineNumber: 227,
+                                        columnNumber: 15
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
+                                                className: "block text-sm font-medium text-gray-700 mb-1",
+                                                children: "Phone Number"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 243,
+                                                columnNumber: 17
+                                            }, undefined),
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                                type: "text",
+                                                name: "phone",
+                                                value: formData.phone,
+                                                onChange: handleChange,
+                                                placeholder: "+1 555-0199",
+                                                className: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/HospitalRegister.js",
+                                                lineNumber: 246,
+                                                columnNumber: 17
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/HospitalRegister.js",
+                                        lineNumber: 242,
+                                        columnNumber: 15
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/HospitalRegister.js",
+                                lineNumber: 226,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                 type: "submit",
-                                variant: "admin",
-                                loading: loading,
-                                className: "w-full",
-                                children: "Register Hospital Account"
+                                disabled: loading,
+                                className: "w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-200 disabled:opacity-50",
+                                children: loading ? 'Registering...' : 'Register Hospital Account'
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalRegister.js",
-                                lineNumber: 222,
+                                lineNumber: 257,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalRegister.js",
-                        lineNumber: 100,
+                        lineNumber: 114,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27578,42 +28112,42 @@ const HospitalRegister = ()=>{
                                 ' ',
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                                     to: "/login/hospital",
-                                    className: "font-medium text-[#2563EB] hover:text-[#1D4ED8] transition-colors",
+                                    className: "font-medium text-blue-600 hover:underline",
                                     children: "Login Here"
                                 }, void 0, false, {
                                     fileName: "src/pages/HospitalRegister.js",
-                                    lineNumber: 235,
+                                    lineNumber: 269,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/HospitalRegister.js",
-                            lineNumber: 233,
+                            lineNumber: 267,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/pages/HospitalRegister.js",
-                        lineNumber: 232,
+                        lineNumber: 266,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/HospitalRegister.js",
-                lineNumber: 84,
+                lineNumber: 98,
                 columnNumber: 9
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/HospitalRegister.js",
-            lineNumber: 83,
+            lineNumber: 97,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/pages/HospitalRegister.js",
-        lineNumber: 82,
+        lineNumber: 96,
         columnNumber: 5
     }, undefined);
 };
-_s(HospitalRegister, "j3QqwypzVrYhfLdAQiBMLcmoQ8U=", false, function() {
+_s(HospitalRegister, "MMsAu1q5SyaYLl3IAAU6kBtRL54=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -27628,7 +28162,7 @@ $RefreshReg$(_c, "HospitalRegister");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/FormInput":"7jlJf","../components/Button":"4mmXM","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"aFTvt":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"aFTvt":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$555e = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$555e.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -27646,6 +28180,8 @@ var _formInput = require("../components/FormInput");
 var _formInputDefault = parcelHelpers.interopDefault(_formInput);
 var _button = require("../components/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _footer = require("../components/Footer");
+var _footerDefault = parcelHelpers.interopDefault(_footer);
 var _s = $RefreshSig$();
 const DonorLogin = ()=>{
     _s();
@@ -27665,18 +28201,38 @@ const DonorLogin = ()=>{
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
         if (validateForm()) {
             setLoading(true);
-            // Simulate API call
-            setTimeout(()=>{
+            try {
+                const response = await fetch('http://localhost:5000/api/donors/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: formData.phoneOrEmail,
+                        password: formData.password
+                    })
+                });
+                const data = await response.json();
+                if (response.ok && data.success) {
+                    setLoading(false);
+                    setSuccess(true);
+                    localStorage.setItem('donor', JSON.stringify(data.donor));
+                    setTimeout(()=>{
+                        navigate('/dashboard/donor');
+                    }, 1200);
+                } else {
+                    setLoading(false);
+                    alert(data.message || 'Invalid email or password.');
+                }
+            } catch (error) {
                 setLoading(false);
-                setSuccess(true);
-                setTimeout(()=>{
-                    navigate('/');
-                }, 1500);
-            }, 1000);
+                console.error('Login error:', error);
+                alert('Cannot connect to server. Check if backend is running.');
+            }
         }
     };
     const handleChange = (e)=>{
@@ -27687,141 +28243,220 @@ const DonorLogin = ()=>{
             }));
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "min-h-screen bg-[#FFF5F5] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "max-w-md w-full space-y-8",
-            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "bg-white rounded-xl shadow-lg p-8",
+        className: "w-full bg-gradient-to-br from-[#FFF0F0] via-[#FEE2E2] to-[#FFFBFB]",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "w-full h-[100dvh] flex items-center justify-center bg-white/20 backdrop-blur-xl border-b border-white/40 px-4 sm:px-6 lg:px-8 py-12 relative overflow-hidden",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "text-center mb-8",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                                className: "text-3xl font-bold text-[#7F1D1D]",
-                                children: "Blood Donor Login"
-                            }, void 0, false, {
-                                fileName: "src/pages/DonorLogin.js",
-                                lineNumber: 61,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                className: "text-[#374151] mt-2",
-                                children: "Access your donor profile and manage donations"
-                            }, void 0, false, {
-                                fileName: "src/pages/DonorLogin.js",
-                                lineNumber: 64,
-                                columnNumber: 13
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/pages/DonorLogin.js",
-                        lineNumber: 60,
-                        columnNumber: 11
-                    }, undefined),
-                    success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "mb-4 p-3 bg-[#16A34A] bg-opacity-10 border border-[#16A34A] text-[#16A34A] rounded-lg text-center",
-                        children: "Login successful! Redirecting..."
+                        className: "absolute top-1/4 left-1/4 w-72 h-72 bg-[#DC2626] rounded-full filter blur-[100px] opacity-[0.08] pointer-events-none"
                     }, void 0, false, {
                         fileName: "src/pages/DonorLogin.js",
-                        lineNumber: 70,
-                        columnNumber: 13
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                        onSubmit: handleSubmit,
-                        className: "space-y-6",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                label: "Phone Number or Email",
-                                type: "text",
-                                name: "phoneOrEmail",
-                                value: formData.phoneOrEmail,
-                                onChange: handleChange,
-                                error: errors.phoneOrEmail,
-                                required: true,
-                                placeholder: "john@example.com or +1234567890",
-                                theme: "donor"
-                            }, void 0, false, {
-                                fileName: "src/pages/DonorLogin.js",
-                                lineNumber: 76,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
-                                label: "Password",
-                                type: "password",
-                                name: "password",
-                                value: formData.password,
-                                onChange: handleChange,
-                                error: errors.password,
-                                required: true,
-                                placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
-                                theme: "donor"
-                            }, void 0, false, {
-                                fileName: "src/pages/DonorLogin.js",
-                                lineNumber: 88,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
-                                type: "submit",
-                                variant: "donor",
-                                loading: loading,
-                                className: "w-full",
-                                children: "Login as Blood Donor"
-                            }, void 0, false, {
-                                fileName: "src/pages/DonorLogin.js",
-                                lineNumber: 100,
-                                columnNumber: 13
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/pages/DonorLogin.js",
-                        lineNumber: 75,
-                        columnNumber: 11
+                        lineNumber: 72,
+                        columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "mt-6 text-center",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                            className: "text-sm text-gray-600",
+                        className: "absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#7F1D1D] rounded-full filter blur-[120px] opacity-[0.05] pointer-events-none"
+                    }, void 0, false, {
+                        fileName: "src/pages/DonorLogin.js",
+                        lineNumber: 73,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "max-w-md w-full relative z-10",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "bg-white/50 backdrop-blur-2xl border border-white/60 rounded-2xl shadow-xl py-12 px-10 min-h-[560px] flex flex-col justify-between transition-transform duration-500 ease-out hover:scale-[0.98]",
                             children: [
-                                "New donor?",
-                                ' ',
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                                    to: "/register/donor",
-                                    className: "font-medium text-[#DC2626] hover:text-[#B91C1C] transition-colors",
-                                    children: "Register Here"
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "flex-1 flex flex-col justify-between",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                            className: "text-center mb-4",
+                                            children: [
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                                                    className: "text-3xl font-bold text-[#7F1D1D] tracking-tight",
+                                                    children: " Blood Donor Login "
+                                                }, void 0, false, {
+                                                    fileName: "src/pages/DonorLogin.js",
+                                                    lineNumber: 80,
+                                                    columnNumber: 17
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                                    className: "text-[#4B5563] mt-3 text-sm font-medium",
+                                                    children: "  "
+                                                }, void 0, false, {
+                                                    fileName: "src/pages/DonorLogin.js",
+                                                    lineNumber: 81,
+                                                    columnNumber: 17
+                                                }, undefined)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/pages/DonorLogin.js",
+                                            lineNumber: 79,
+                                            columnNumber: 15
+                                        }, undefined),
+                                        success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                            className: "mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 rounded-lg text-center backdrop-blur-sm text-sm font-semibold",
+                                            children: "Login successful! Redirecting..."
+                                        }, void 0, false, {
+                                            fileName: "src/pages/DonorLogin.js",
+                                            lineNumber: 85,
+                                            columnNumber: 17
+                                        }, undefined),
+                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                                            onSubmit: handleSubmit,
+                                            className: "space-y-6",
+                                            children: [
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                    className: "space-y-5",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
+                                                            label: "Phone Number or Email",
+                                                            type: "text",
+                                                            name: "phoneOrEmail",
+                                                            value: formData.phoneOrEmail,
+                                                            onChange: handleChange,
+                                                            error: errors.phoneOrEmail,
+                                                            required: true,
+                                                            placeholder: "john@example.com or +1234567890",
+                                                            theme: "donor"
+                                                        }, void 0, false, {
+                                                            fileName: "src/pages/DonorLogin.js",
+                                                            lineNumber: 92,
+                                                            columnNumber: 19
+                                                        }, undefined),
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
+                                                            label: "Password",
+                                                            type: "password",
+                                                            name: "password",
+                                                            value: formData.password,
+                                                            onChange: handleChange,
+                                                            error: errors.password,
+                                                            required: true,
+                                                            placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                                            theme: "donor"
+                                                        }, void 0, false, {
+                                                            fileName: "src/pages/DonorLogin.js",
+                                                            lineNumber: 103,
+                                                            columnNumber: 19
+                                                        }, undefined)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "src/pages/DonorLogin.js",
+                                                    lineNumber: 91,
+                                                    columnNumber: 17
+                                                }, undefined),
+                                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                    className: "pt-4 space-y-4 text-center",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
+                                                            type: "submit",
+                                                            variant: "donor",
+                                                            loading: loading,
+                                                            className: "w-full text-white font-medium py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-[350ms] ease-in-out [background:linear-gradient(135deg,#EF4444,#DC2626)] hover:[background:linear-gradient(135deg,#DC2626,#B91C1C)]",
+                                                            children: "Login as Blood Donor"
+                                                        }, void 0, false, {
+                                                            fileName: "src/pages/DonorLogin.js",
+                                                            lineNumber: 117,
+                                                            columnNumber: 19
+                                                        }, undefined),
+                                                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                                                                to: "/forgot-password/donor",
+                                                                className: "text-xs font-bold text-[#4B5563] hover:text-[#DC2626] transition-colors duration-200",
+                                                                children: "Forgot Password?"
+                                                            }, void 0, false, {
+                                                                fileName: "src/pages/DonorLogin.js",
+                                                                lineNumber: 126,
+                                                                columnNumber: 21
+                                                            }, undefined)
+                                                        }, void 0, false, {
+                                                            fileName: "src/pages/DonorLogin.js",
+                                                            lineNumber: 125,
+                                                            columnNumber: 19
+                                                        }, undefined)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "src/pages/DonorLogin.js",
+                                                    lineNumber: 116,
+                                                    columnNumber: 17
+                                                }, undefined)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "src/pages/DonorLogin.js",
+                                            lineNumber: 90,
+                                            columnNumber: 15
+                                        }, undefined)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "src/pages/DonorLogin.js",
+                                    lineNumber: 78,
+                                    columnNumber: 13
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: "mt-8 text-center pt-4 border-t border-white/30",
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "text-sm text-[#4B5563] font-medium",
+                                        children: [
+                                            "New donor?",
+                                            ' ',
+                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                                                to: "/register/donor",
+                                                className: "font-bold text-[#DC2626] hover:text-[#B91C1C] underline decoration-[#DC2626]/40 hover:decoration-[#B91C1C] transition-colors",
+                                                children: "Register Here"
+                                            }, void 0, false, {
+                                                fileName: "src/pages/DonorLogin.js",
+                                                lineNumber: 137,
+                                                columnNumber: 17
+                                            }, undefined)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "src/pages/DonorLogin.js",
+                                        lineNumber: 135,
+                                        columnNumber: 15
+                                    }, undefined)
                                 }, void 0, false, {
                                     fileName: "src/pages/DonorLogin.js",
-                                    lineNumber: 113,
-                                    columnNumber: 15
+                                    lineNumber: 134,
+                                    columnNumber: 13
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/DonorLogin.js",
-                            lineNumber: 111,
-                            columnNumber: 13
+                            lineNumber: 77,
+                            columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/pages/DonorLogin.js",
-                        lineNumber: 110,
-                        columnNumber: 11
+                        lineNumber: 76,
+                        columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/DonorLogin.js",
-                lineNumber: 59,
-                columnNumber: 9
+                lineNumber: 69,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "w-full m-0 p-0",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _footerDefault.default), {}, void 0, false, {
+                    fileName: "src/pages/DonorLogin.js",
+                    lineNumber: 149,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/pages/DonorLogin.js",
+                lineNumber: 148,
+                columnNumber: 7
             }, undefined)
-        }, void 0, false, {
-            fileName: "src/pages/DonorLogin.js",
-            lineNumber: 58,
-            columnNumber: 7
-        }, undefined)
-    }, void 0, false, {
+        ]
+    }, void 0, true, {
         fileName: "src/pages/DonorLogin.js",
-        lineNumber: 57,
+        lineNumber: 67,
         columnNumber: 5
     }, undefined);
 };
-_s(DonorLogin, "nvfwoYNSSWa5DG+q906YpedQm1o=", false, function() {
+_s(DonorLogin, "U8Spp1axtsfHWd4BTarVk6s0wNA=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -27836,7 +28471,7 @@ $RefreshReg$(_c, "DonorLogin");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/FormInput":"7jlJf","../components/Button":"4mmXM","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"9lhrQ":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/FormInput":"7jlJf","../components/Button":"4mmXM","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","../components/Footer":"lq1kZ"}],"9lhrQ":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$50ae = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 $parcel$ReactRefreshHelpers$50ae.init();
 var prevRefreshReg = globalThis.$RefreshReg$;
@@ -27867,7 +28502,9 @@ const DonorRegister = ()=>{
         bloodGroup: '',
         allergies: '',
         conditions: '',
-        lastDonation: ''
+        lastDonation: '',
+        password: '',
+        confirmPassword: ''
     });
     const [errors, setErrors] = (0, _react.useState)({});
     const [loading, setLoading] = (0, _react.useState)(false);
@@ -27892,21 +28529,35 @@ const DonorRegister = ()=>{
         else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email format is invalid';
         if (!formData.address) newErrors.address = 'Residential address is required';
         if (!formData.bloodGroup) newErrors.bloodGroup = 'Blood group is required';
+        if (!formData.password) newErrors.password = 'Password is required';
+        else if (formData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
-        if (validateForm()) {
-            setLoading(true);
-            // Simulate API call
+        setLoading(true);
+        setErrors({});
+        try {
+            const response = await fetch('http://localhost:5000/api/donors/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            });
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.message || 'Registration failed');
+            setSuccess(true);
             setTimeout(()=>{
-                setLoading(false);
-                setSuccess(true);
-                setTimeout(()=>{
-                    navigate('/login/donor');
-                }, 1500);
-            }, 1000);
+                navigate('/donor/login');
+            }, 2000);
+        } catch (err) {
+            setErrors({
+                server: err.message
+            });
+        } finally{
+            setLoading(false);
         }
     };
     const handleChange = (e)=>{
@@ -27931,7 +28582,7 @@ const DonorRegister = ()=>{
                                 children: "Register as Active Donor"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 78,
+                                lineNumber: 102,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -27939,13 +28590,13 @@ const DonorRegister = ()=>{
                                 children: "Create your blood donor profile"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 81,
+                                lineNumber: 105,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/DonorRegister.js",
-                        lineNumber: 77,
+                        lineNumber: 101,
                         columnNumber: 11
                     }, undefined),
                     success && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27953,7 +28604,7 @@ const DonorRegister = ()=>{
                         children: "Registration successful! Redirecting to login..."
                     }, void 0, false, {
                         fileName: "src/pages/DonorRegister.js",
-                        lineNumber: 87,
+                        lineNumber: 111,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -27974,7 +28625,7 @@ const DonorRegister = ()=>{
                                         theme: "donor"
                                     }, void 0, false, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 94,
+                                        lineNumber: 118,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -27989,13 +28640,13 @@ const DonorRegister = ()=>{
                                         theme: "donor"
                                     }, void 0, false, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 105,
+                                        lineNumber: 129,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 93,
+                                lineNumber: 117,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28013,7 +28664,7 @@ const DonorRegister = ()=>{
                                         theme: "donor"
                                     }, void 0, false, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 119,
+                                        lineNumber: 143,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -28028,13 +28679,13 @@ const DonorRegister = ()=>{
                                         theme: "donor"
                                     }, void 0, false, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 131,
+                                        lineNumber: 155,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 118,
+                                lineNumber: 142,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -28048,7 +28699,7 @@ const DonorRegister = ()=>{
                                 theme: "donor"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 144,
+                                lineNumber: 168,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28063,13 +28714,13 @@ const DonorRegister = ()=>{
                                                 children: "*"
                                             }, void 0, false, {
                                                 fileName: "src/pages/DonorRegister.js",
-                                                lineNumber: 157,
+                                                lineNumber: 181,
                                                 columnNumber: 29
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 156,
+                                        lineNumber: 180,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -28084,7 +28735,7 @@ const DonorRegister = ()=>{
                                                 children: "Select Blood Group"
                                             }, void 0, false, {
                                                 fileName: "src/pages/DonorRegister.js",
-                                                lineNumber: 166,
+                                                lineNumber: 190,
                                                 columnNumber: 17
                                             }, undefined),
                                             bloodGroups.map((group)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -28092,13 +28743,13 @@ const DonorRegister = ()=>{
                                                     children: group
                                                 }, group, false, {
                                                     fileName: "src/pages/DonorRegister.js",
-                                                    lineNumber: 168,
+                                                    lineNumber: 192,
                                                     columnNumber: 19
                                                 }, undefined))
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 159,
+                                        lineNumber: 183,
                                         columnNumber: 15
                                     }, undefined),
                                     errors.bloodGroup && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -28106,13 +28757,52 @@ const DonorRegister = ()=>{
                                         children: errors.bloodGroup
                                     }, void 0, false, {
                                         fileName: "src/pages/DonorRegister.js",
-                                        lineNumber: 171,
+                                        lineNumber: 195,
                                         columnNumber: 37
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 155,
+                                lineNumber: 179,
+                                columnNumber: 13
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "grid md:grid-cols-2 gap-4",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
+                                        label: "Password",
+                                        type: "password",
+                                        name: "password",
+                                        value: formData.password,
+                                        onChange: handleChange,
+                                        error: errors.password,
+                                        required: true,
+                                        placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                        theme: "admin"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/DonorRegister.js",
+                                        lineNumber: 198,
+                                        columnNumber: 15
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
+                                        label: "Confirm Password",
+                                        type: "password",
+                                        name: "confirmPassword",
+                                        value: formData.confirmPassword,
+                                        onChange: handleChange,
+                                        error: errors.confirmPassword,
+                                        required: true,
+                                        placeholder: "\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022",
+                                        theme: "admin"
+                                    }, void 0, false, {
+                                        fileName: "src/pages/DonorRegister.js",
+                                        lineNumber: 210,
+                                        columnNumber: 15
+                                    }, undefined)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/pages/DonorRegister.js",
+                                lineNumber: 197,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -28124,7 +28814,7 @@ const DonorRegister = ()=>{
                                 theme: "donor"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 174,
+                                lineNumber: 222,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -28136,7 +28826,7 @@ const DonorRegister = ()=>{
                                 theme: "donor"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 183,
+                                lineNumber: 231,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formInputDefault.default), {
@@ -28149,7 +28839,7 @@ const DonorRegister = ()=>{
                                 theme: "donor"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 192,
+                                lineNumber: 240,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
@@ -28160,13 +28850,13 @@ const DonorRegister = ()=>{
                                 children: "Register as Active Donor"
                             }, void 0, false, {
                                 fileName: "src/pages/DonorRegister.js",
-                                lineNumber: 202,
+                                lineNumber: 250,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/DonorRegister.js",
-                        lineNumber: 92,
+                        lineNumber: 116,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -28182,38 +28872,38 @@ const DonorRegister = ()=>{
                                     children: "Login Here"
                                 }, void 0, false, {
                                     fileName: "src/pages/DonorRegister.js",
-                                    lineNumber: 215,
+                                    lineNumber: 263,
                                     columnNumber: 15
                                 }, undefined)
                             ]
                         }, void 0, true, {
                             fileName: "src/pages/DonorRegister.js",
-                            lineNumber: 213,
+                            lineNumber: 261,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/pages/DonorRegister.js",
-                        lineNumber: 212,
+                        lineNumber: 260,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/DonorRegister.js",
-                lineNumber: 76,
+                lineNumber: 100,
                 columnNumber: 9
             }, undefined)
         }, void 0, false, {
             fileName: "src/pages/DonorRegister.js",
-            lineNumber: 75,
+            lineNumber: 99,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/pages/DonorRegister.js",
-        lineNumber: 74,
+        lineNumber: 98,
         columnNumber: 5
     }, undefined);
 };
-_s(DonorRegister, "nmrgREKyaKjS/OjzNi57lw43muM=", false, function() {
+_s(DonorRegister, "ZYCtmpNBy+bm0qAWYCSSjbJKU8c=", false, function() {
     return [
         (0, _reactRouterDom.useNavigate)
     ];
@@ -28228,6 +28918,194 @@ $RefreshReg$(_c, "DonorRegister");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/FormInput":"7jlJf","../components/Button":"4mmXM","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"irmnC":[function() {},{}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequire45c8", {}, null, null, "http://localhost:1234")
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/FormInput":"7jlJf","../components/Button":"4mmXM","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"gDUXy":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$da93 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$da93.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$da93.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+var _s = $RefreshSig$();
+const DonorDashboard = ()=>{
+    _s();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const donor = JSON.parse(localStorage.getItem('donor') || '{}');
+    const handleLogout = ()=>{
+        localStorage.removeItem('donor');
+        navigate('/login/donor');
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        style: {
+            padding: '40px',
+            fontFamily: 'sans-serif'
+        },
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "\uD83C\uDF89 Donor Dashboard (Logged In)"
+            }, void 0, false, {
+                fileName: "src/pages/DonorDashboard.js",
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: [
+                    "Welcome, ",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                        children: donor.name || donor.email || 'Donor'
+                    }, void 0, false, {
+                        fileName: "src/pages/DonorDashboard.js",
+                        lineNumber: 15,
+                        columnNumber: 19
+                    }, undefined),
+                    "!"
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/DonorDashboard.js",
+                lineNumber: 15,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "Your authentication was successful."
+            }, void 0, false, {
+                fileName: "src/pages/DonorDashboard.js",
+                lineNumber: 16,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: handleLogout,
+                style: {
+                    padding: '8px 16px',
+                    cursor: 'pointer'
+                },
+                children: "Log Out"
+            }, void 0, false, {
+                fileName: "src/pages/DonorDashboard.js",
+                lineNumber: 17,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/DonorDashboard.js",
+        lineNumber: 13,
+        columnNumber: 5
+    }, undefined);
+};
+_s(DonorDashboard, "CzcTeTziyjMsSrAVmHuCCb6+Bfg=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = DonorDashboard;
+exports.default = DonorDashboard;
+var _c;
+$RefreshReg$(_c, "DonorDashboard");
+
+  $parcel$ReactRefreshHelpers$da93.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"axijR":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$83ba = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$83ba.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$83ba.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+var _s = $RefreshSig$();
+const HospitalDashboard = ()=>{
+    _s();
+    const navigate = (0, _reactRouterDom.useNavigate)();
+    const hospital = JSON.parse(localStorage.getItem('hospital') || '{}');
+    const handleLogout = ()=>{
+        localStorage.removeItem('hospital');
+        navigate('/login/hospital');
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        style: {
+            padding: '40px',
+            fontFamily: 'sans-serif'
+        },
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                children: "\uD83C\uDF89 Hospital Dashboard (Logged In)"
+            }, void 0, false, {
+                fileName: "src/pages/HospitalDashboard.js",
+                lineNumber: 13,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: [
+                    "Welcome, ",
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                        children: hospital.name || hospital.email || 'Hospital'
+                    }, void 0, false, {
+                        fileName: "src/pages/HospitalDashboard.js",
+                        lineNumber: 14,
+                        columnNumber: 19
+                    }, undefined),
+                    "!"
+                ]
+            }, void 0, true, {
+                fileName: "src/pages/HospitalDashboard.js",
+                lineNumber: 14,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                children: "Your authentication was successful."
+            }, void 0, false, {
+                fileName: "src/pages/HospitalDashboard.js",
+                lineNumber: 15,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: handleLogout,
+                style: {
+                    padding: '8px 16px',
+                    cursor: 'pointer'
+                },
+                children: "Log Out"
+            }, void 0, false, {
+                fileName: "src/pages/HospitalDashboard.js",
+                lineNumber: 16,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/pages/HospitalDashboard.js",
+        lineNumber: 12,
+        columnNumber: 5
+    }, undefined);
+};
+_s(HospitalDashboard, "CzcTeTziyjMsSrAVmHuCCb6+Bfg=", false, function() {
+    return [
+        (0, _reactRouterDom.useNavigate)
+    ];
+});
+_c = HospitalDashboard;
+exports.default = HospitalDashboard;
+var _c;
+$RefreshReg$(_c, "HospitalDashboard");
+
+  $parcel$ReactRefreshHelpers$83ba.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"irmnC":[function() {},{}]},["5j6Kf","a0t4e"], "a0t4e", "parcelRequire45c8", {}, null, null, "http://localhost:1234")
 
 //# sourceMappingURL=project.31b563d9.js.map

@@ -33,20 +33,46 @@ const HospitalLogin = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      setLoading(true);
-      // Simulate API call
-      setTimeout(() => {
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (validateForm()) {
+    setLoading(true);
+
+    try {
+      const response = await fetch('http://localhost:5000/api/hospitals/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setLoading(false);
         setSuccess(true);
+
+        // Save session data
+        localStorage.setItem('hospital', JSON.stringify(data.hospital));
+
+        // Redirect to Hospital Dashboard
         setTimeout(() => {
-          navigate('/');
-        }, 1500);
-      }, 1000);
+          navigate('/dashboard/hospital');
+        }, 1200);
+      } else {
+        setLoading(false);
+        alert(data.message || 'Invalid email or password.');
+      }
+    } catch (error) {
+      setLoading(false);
+      console.error('Login error:', error);
+      alert('Cannot connect to server. Check if backend is running.');
     }
-  };
+  }
+};
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
