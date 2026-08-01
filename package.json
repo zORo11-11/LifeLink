@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "LifeLink - Centralized hospital organ allocation and blood donation management system",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html",
-    "dev": "parcel index.html"
+    "start": "parcel index.html --no-cache",
+    "build": "parcel build index.html --no-cache",
+    "dev": "parcel index.html --no-cache"
   },
   "keywords": [],
   "author": "",

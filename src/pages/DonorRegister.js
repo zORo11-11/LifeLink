@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
+import Footer from '../components/Footer';
 
 const DonorRegister = () => {
   const navigate = useNavigate();
@@ -269,7 +270,9 @@ const DonorRegister = () => {
             </p>
           </div>
         </div>
+        
       </div>
+      <Footer/>
     </div>
   );
 };
