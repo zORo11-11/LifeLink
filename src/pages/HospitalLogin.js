@@ -83,8 +83,7 @@ const HospitalLogin = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-[#FFF0F0] via-[#FEE2E2] to-[#FFFBFB] flex flex-col justify-between"> 
-      {/* Login Screen Main Wrapper */} 
+<div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800">      {/* Login Screen Main Wrapper */} 
       <div className="w-full max-h-screen flex-grow flex items-center justify-center bg-white/20 backdrop-blur-xl border-b border-white/40 px-4 sm:px-6 lg:px-8 py-12 relative"> 
         
         {/* Ambient Glow Orbs */}
