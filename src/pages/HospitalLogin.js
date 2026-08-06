@@ -84,22 +84,8 @@ const HospitalLogin = () => {
   };
 
   return (
-<<<<<<< HEAD
 <div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800">      {/* Login Screen Main Wrapper */} 
       <div className="w-full max-h-screen flex-grow flex items-center justify-center bg-white/20 backdrop-blur-xl border-b border-white/40 px-4 sm:px-6 lg:px-8 py-12 relative"> 
-=======
-    <div 
-      className="w-full min-h-screen flex flex-col justify-between"
-      style={{
-        backgroundImage: `url(${hospitalBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    > 
-      {/* Login Screen Main Wrapper */} 
-      <div className="w-full flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 relative bg-slate-900/[0.05] overflow-hidden"> 
->>>>>>> e8bfaf3b9af59d60e2703f0251aa1d9b068615a1
         
         {/* ECG Graph Grid Background */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.25]" style={{

@@ -67,14 +67,14 @@ const DonorLogin = () => {
     <div className="w-full min-h-screen bg-gradient-to-br from-[#E6F4F1] via-[#F4FAF8] to-[#E6F4F1] flex flex-col justify-between relative overflow-hidden"> 
       
       {/* Faint Heartbeat Trace Overlay in background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] text-teal-800">
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] text-red-800">
         <svg className="w-full h-full" viewBox="0 0 1600 800" preserveAspectRatio="none">
           <path d="M 0 400 L 400 400 L 420 380 L 430 420 L 440 320 L 450 480 L 460 400 L 470 410 L 480 395 L 490 400 L 900 400 L 920 380 L 930 420 L 940 320 L 950 480 L 960 400 L 970 410 L 980 395 L 990 400 L 1600 400" fill="none" stroke="currentColor" strokeWidth="3" />
         </svg>
       </div>
 
       {/* Large watermark heart with pulse on the right side */}
-      <div className="absolute right-[-100px] bottom-[-50px] w-[500px] h-[500px] text-teal-600/[0.03] pointer-events-none hidden lg:block">
+      <div className="absolute right-[-100px] bottom-[-50px] w-[500px] h-[500px] text-red-600/[0.03] pointer-events-none hidden lg:block">
         <svg fill="currentColor" viewBox="0 0 24 24" className="w-full h-full">
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
         </svg>
@@ -88,7 +88,7 @@ const DonorLogin = () => {
       }} />
 
       {/* ECG Heartbeat Lines with Advanced Glow */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-25">
+      <div className="absolute inset-0 flex items-start pt-60 justify-center pointer-events-none opacity-25">
         <svg className="w-full h-48 text-red-500" viewBox="0 0 1600 200" preserveAspectRatio="none">
           <defs>
             <filter id="super-glow-red" x="-20%" y="-20%" width="140%" height="140%">
@@ -149,12 +149,12 @@ const DonorLogin = () => {
               {/* Droplet Header Badge with Pulse Line */}
               <div className="relative mx-auto w-28 h-28 mb-3 flex items-center justify-center">
                 {/* Pulse Line behind droplet */}
-                <svg className="absolute w-28 h-10 text-teal-200/50" viewBox="0 0 100 30" fill="none" stroke="currentColor" strokeWidth={1.8}>
+                <svg className="absolute w-28 h-10 text-red-200/50" viewBox="0 0 100 30" fill="none" stroke="currentColor" strokeWidth={1.8}>
                   <path d="M 0 15 L 25 15 L 30 5 L 35 25 L 40 15 L 60 15 L 65 5 L 70 25 L 75 15 L 100 15" />
                 </svg>
                 {/* Droplet SVG */}
                 <div className="relative w-16 h-16 flex items-center justify-center drop-shadow-[0_4px_10px_rgba(20,184,166,0.15)]">
-                  <svg className="w-full h-full text-teal-500" fill="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-full h-full text-red-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.69l5.66 5.66A8 8 0 1 1 6.34 8.35z" />
                   </svg>
                   {/* Heart inside droplet */}
@@ -191,7 +191,7 @@ const DonorLogin = () => {
                       onChange={handleChange} 
                       required 
                       placeholder="Email or Donor ID" 
-                      className="w-full pl-12 pr-4 py-3.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 rounded-2xl text-[14px] bg-slate-50/20 text-slate-700 placeholder-slate-400 transition-all font-medium"
+                      className="w-full pl-12 pr-4 py-3.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 rounded-2xl text-[14px] bg-slate-50/20 text-slate-700 placeholder-slate-400 transition-all font-medium"
                     />
                   </div>
                   {errors.phoneOrEmail && <p className="text-red-500 text-[10px] font-semibold mt-1 pl-4">{errors.phoneOrEmail}</p>}
@@ -212,7 +212,7 @@ const DonorLogin = () => {
                       onChange={handleChange} 
                       required 
                       placeholder="Password" 
-                      className="w-full pl-12 pr-12 py-3.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 rounded-2xl text-[14px] bg-slate-50/20 text-slate-700 placeholder-slate-400 transition-all font-medium"
+                      className="w-full pl-12 pr-12 py-3.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 rounded-2xl text-[14px] bg-slate-50/20 text-slate-700 placeholder-slate-400 transition-all font-medium"
                     />
                     <span 
                       onClick={() => setShowPassword(!showPassword)} 
@@ -234,7 +234,7 @@ const DonorLogin = () => {
                 </div>
 
                 <div className="text-center py-2"> 
-                  <Link to="/forgot-password/donor" className="text-xs font-bold text-teal-500 hover:underline" > 
+                  <Link to="/forgot-password/donor" className="text-xs font-bold text-red-500 hover:underline" > 
                     Forgot Password? 
                   </Link> 
                 </div>
@@ -244,7 +244,7 @@ const DonorLogin = () => {
                     type="submit" 
                     variant="donor" 
                     loading={loading} 
-                    className="w-full text-white font-semibold py-3.5 rounded-2xl shadow-sm hover:shadow transition-all duration-200 bg-teal-500 hover:bg-teal-600 text-sm" 
+                    className="w-full text-white font-semibold py-3.5 rounded-2xl shadow-sm hover:shadow transition-all duration-200 bg-red-500 hover:bg-red-600 text-sm" 
                   > 
                     Login 
                   </Button> 
@@ -290,7 +290,7 @@ const DonorLogin = () => {
 
             {/* Secure Trust Badge */}
             <div className="mt-8 flex items-center justify-center space-x-1.5 text-[11px] text-slate-400 font-bold">
-              <svg className="w-4 h-4 text-teal-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
               <span>Secure</span>
@@ -303,7 +303,7 @@ const DonorLogin = () => {
             <div className="mt-6 text-center pt-4 border-t border-slate-200/40"> 
               <p className="text-xs text-slate-500 font-semibold"> 
                 New donor?{' '} 
-                <Link to="/register/donor" className="font-bold text-teal-500 hover:text-teal-600 underline decoration-teal-500/30 hover:decoration-teal-600 transition-colors" > 
+                <Link to="/register/donor" className="font-bold text-red-500 hover:text-red-600 underline decoration-red-500/30 hover:decoration-red-600 transition-colors" > 
                   Register Here 
                 </Link> 
               </p> 

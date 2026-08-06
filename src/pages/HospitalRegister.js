@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 const HospitalRegister = () => {
   const navigate = useNavigate();
@@ -93,8 +94,7 @@ const HospitalRegister = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl w-full space-y-8">
+<div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800">      <div className="max-w-2xl w-full space-y-8">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-[#1E3A8A]">
@@ -273,6 +273,9 @@ const HospitalRegister = () => {
           </div>
         </div>
       </div>
+      <div className="w-full m-0 p-0"> 
+        <Footer /> 
+      </div> 
     </div>
   );
 };

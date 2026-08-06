@@ -96,8 +96,8 @@ const DonorRegister = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF5F5] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl w-full space-y-8">
+<div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800">      <div className="max-w-2xl w-full space-y-8">
+  <main className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-[#991B1B]">
@@ -270,9 +270,12 @@ const DonorRegister = () => {
             </p>
           </div>
         </div>
-        
+        </main>
       </div>
-      <Footer/>
+      
+      <div className="w-full m-0 p-0"> 
+        <Footer /> 
+      </div> 
     </div>
   );
 };
