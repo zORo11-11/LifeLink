@@ -34,7 +34,7 @@ const LandingPage = () => {
           }
         }
       `}</style>
-      
+
       {/* Ambient Glow Orbs */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none network-pulse-glow" />
       <div className="absolute top-1/3 right-10 w-96 h-96 bg-indigo-400/15 rounded-full blur-3xl pointer-events-none network-pulse-glow" />
@@ -46,10 +46,10 @@ const LandingPage = () => {
         {/* Hero Section: FULL-BACKGROUND VIDEO HERO PANEL */}
         <section className="flex-1 flex items-center justify-center py-8 sm:py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            
+
             {/* Main Hero Wrapper */}
             <div className="relative overflow-hidden rounded-3xl border border-white/80 shadow-2xl shadow-blue-500/10 min-h-[500px] flex items-center">
-              
+
               {/* 1. Full-Cover High Quality Video Layer */}
               <video
                 autoPlay
@@ -78,14 +78,14 @@ const LandingPage = () => {
                     Centralized hospital organ allocation and blood donation management system. High-precision coordination for life-saving transfers powered by real-time logistics.
                   </p>
                   <div className="flex flex-wrap gap-4">
-                    <Link 
-                      to="/register/hospital" 
+                    <Link
+                      to="/register/hospital"
                       className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow-md hover:bg-blue-700 hover:shadow-lg transition-all"
                     >
                       Get Started
                     </Link>
-                    <a 
-                      href="#portals" 
+                    <a
+                      href="#portals"
                       className="px-6 py-3 bg-white/80 border border-slate-200 text-slate-700 font-semibold rounded-xl hover:bg-slate-100 transition-all"
                     >
                       View Portals
@@ -110,7 +110,7 @@ const LandingPage = () => {
             Choose Your Portal
           </h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            
+
             {/* Admin Portal Glass Card */}
             <div className="glass-card-enhanced rounded-2xl shadow-xl p-8 text-center border border-white/70 hover:border-blue-500/50 hover:bg-white/60 transition-all duration-300 transform hover:-translate-y-1 group">
               <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">🏢</div>
