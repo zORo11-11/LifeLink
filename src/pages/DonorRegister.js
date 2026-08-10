@@ -77,7 +77,7 @@ const DonorRegister = () => {
 
     setSuccess(true);
     setTimeout(() => {
-      navigate('/donor/login');
+      navigate('/login/donor');
     }, 2000);
 
   } catch (err) {

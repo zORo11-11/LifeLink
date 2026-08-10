@@ -81,14 +81,14 @@ const DonorDashboard = () => {
   useEffect(() => {
     // Load local storage states
     const storedDonor = localStorage.getItem('donor');
+    if (!storedDonor) {
+      navigate('/', { replace: true });
+      return;
+    }
+    setDonor(JSON.parse(storedDonor));
+
     const storedAppointments = localStorage.getItem('donor_appointments');
     const storedRequests = localStorage.getItem('donor_requests');
-
-    if (storedDonor) {
-      setDonor(JSON.parse(storedDonor));
-    } else {
-      localStorage.setItem('donor', JSON.stringify(donor));
-    }
 
     if (storedAppointments) setAppointments(JSON.parse(storedAppointments));
     if (storedRequests) setDonorRequests(JSON.parse(storedRequests));
@@ -109,7 +109,7 @@ const DonorDashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('donor');
-    navigate('/login/donor');
+    navigate('/login/donor', { replace: true });
   };
 
   // Toggle Availability state
@@ -1002,10 +1002,10 @@ const DonorDashboard = () => {
             <form onSubmit={handleSaveProfile} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                  <label className="block text-xs font-bold text-slate-505 uppercase mb-1">Full Name</label>
                   <input
                     type="text"
-                    value={donor.name}
+                    value={donor.name || ''}
                     onChange={(e) => setDonor(prev => ({ ...prev, name: e.target.value }))}
                     required
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
@@ -1015,7 +1015,7 @@ const DonorDashboard = () => {
                   <label className="block text-xs font-bold text-slate-505 uppercase mb-1">Email Address</label>
                   <input
                     type="email"
-                    value={donor.email}
+                    value={donor.email || ''}
                     disabled
                     className="w-full px-4 py-3 bg-slate-100 border border-slate-200 text-slate-500 rounded-xl text-sm cursor-not-allowed font-semibold"
                   />
@@ -1026,7 +1026,7 @@ const DonorDashboard = () => {
                 <div>
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Blood Group</label>
                   <select
-                    value={donor.bloodType}
+                    value={donor.bloodType || 'A+'}
                     onChange={(e) => setDonor(prev => ({ ...prev, bloodType: e.target.value }))}
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-700 font-bold"
                   >
@@ -1039,7 +1039,7 @@ const DonorDashboard = () => {
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Last Donated Date</label>
                   <input
                     type="date"
-                    value={donor.lastDonated}
+                    value={donor.lastDonated || ''}
                     onChange={(e) => setDonor(prev => ({ ...prev, lastDonated: e.target.value }))}
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                   />
@@ -1051,7 +1051,7 @@ const DonorDashboard = () => {
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Phone Contact</label>
                   <input
                     type="text"
-                    value={donor.phone}
+                    value={donor.phone || ''}
                     onChange={(e) => setDonor(prev => ({ ...prev, phone: e.target.value }))}
                     required
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
@@ -1061,7 +1061,7 @@ const DonorDashboard = () => {
                   <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Zip Code / Location</label>
                   <input
                     type="text"
-                    value={donor.zipCode}
+                    value={donor.zipCode || ''}
                     onChange={(e) => setDonor(prev => ({ ...prev, zipCode: e.target.value }))}
                     required
                     className="w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"

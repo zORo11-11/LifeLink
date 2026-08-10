@@ -75,10 +75,16 @@ router.post('/login', async (req, res) => {
       message: 'Login successful!',
       donor: {
         id: donor._id,
-        name: donor.name,
+        name: donor.fullName,
         email: donor.email,
+        bloodType: donor.bloodGroup,
         bloodGroup: donor.bloodGroup,
-        isAvailable: donor.isAvailable
+        available: donor.isAvailable,
+        isAvailable: donor.isAvailable,
+        phone: donor.phone,
+        lastDonated: donor.lastDonation ? donor.lastDonation.toISOString().split('T')[0] : '',
+        address: donor.address,
+        zipCode: donor.address
       }
     });
 

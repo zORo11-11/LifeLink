@@ -127,17 +127,11 @@ const HospitalDashboard = () => {
 
   useEffect(() => {
     const stored = localStorage.getItem('hospital');
-    if (stored) {
-      setHospital(JSON.parse(stored));
-    } else {
-      setHospital({
-        name: 'St. Jude General Hospital',
-        email: 'admin@stjude.org',
-        licenseId: 'HOSP-77890',
-        adminName: 'Dr. Evelyn Martinez',
-        city: 'New York'
-      });
+    if (!stored) {
+      navigate('/', { replace: true });
+      return;
     }
+    setHospital(JSON.parse(stored));
 
     // Load state from localStorage if exists
     const storedInventory = localStorage.getItem('blood_inventory');
@@ -170,7 +164,7 @@ const HospitalDashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('hospital');
-    navigate('/login/hospital');
+    navigate('/login/hospital', { replace: true });
   };
 
   // Submit Emergency Request

@@ -207,11 +207,11 @@
       });
     }
   }
-})({"ieapP":[function(require,module,exports,__globalThis) {
+})({"juuAP":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
-var HMR_SERVER_PORT = 1234;
+var HMR_SERVER_PORT = 6607;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
@@ -29895,7 +29895,7 @@ const DonorRegister = ()=>{
             if (!response.ok) throw new Error(data.message || 'Registration failed');
             setSuccess(true);
             setTimeout(()=>{
-                navigate('/donor/login');
+                navigate('/login/donor');
             }, 2000);
         } catch (err) {
             setErrors({
@@ -30513,10 +30513,15 @@ const DonorDashboard = ()=>{
     (0, _react.useEffect)(()=>{
         // Load local storage states
         const storedDonor = localStorage.getItem('donor');
+        if (!storedDonor) {
+            navigate('/', {
+                replace: true
+            });
+            return;
+        }
+        setDonor(JSON.parse(storedDonor));
         const storedAppointments = localStorage.getItem('donor_appointments');
         const storedRequests = localStorage.getItem('donor_requests');
-        if (storedDonor) setDonor(JSON.parse(storedDonor));
-        else localStorage.setItem('donor', JSON.stringify(donor));
         if (storedAppointments) setAppointments(JSON.parse(storedAppointments));
         if (storedRequests) setDonorRequests(JSON.parse(storedRequests));
     }, []);
@@ -30536,7 +30541,9 @@ const DonorDashboard = ()=>{
     };
     const handleLogout = ()=>{
         localStorage.removeItem('donor');
-        navigate('/login/donor');
+        navigate('/login/donor', {
+            replace: true
+        });
     };
     // Toggle Availability state
     const handleToggleAvailability = ()=>{
@@ -32775,7 +32782,7 @@ const DonorDashboard = ()=>{
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                 children: [
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                                        className: "block text-xs font-bold text-slate-500 uppercase mb-1",
+                                                        className: "block text-xs font-bold text-slate-505 uppercase mb-1",
                                                         children: "Full Name"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/DonorDashboard.js",
@@ -32784,7 +32791,7 @@ const DonorDashboard = ()=>{
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                                         type: "text",
-                                                        value: donor.name,
+                                                        value: donor.name || '',
                                                         onChange: (e)=>setDonor((prev)=>({
                                                                     ...prev,
                                                                     name: e.target.value
@@ -32814,7 +32821,7 @@ const DonorDashboard = ()=>{
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                                         type: "email",
-                                                        value: donor.email,
+                                                        value: donor.email || '',
                                                         disabled: true,
                                                         className: "w-full px-4 py-3 bg-slate-100 border border-slate-200 text-slate-500 rounded-xl text-sm cursor-not-allowed font-semibold"
                                                     }, void 0, false, {
@@ -32848,7 +32855,7 @@ const DonorDashboard = ()=>{
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
-                                                        value: donor.bloodType,
+                                                        value: donor.bloodType || 'A+',
                                                         onChange: (e)=>setDonor((prev)=>({
                                                                     ...prev,
                                                                     bloodType: e.target.value
@@ -32894,7 +32901,7 @@ const DonorDashboard = ()=>{
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                                         type: "date",
-                                                        value: donor.lastDonated,
+                                                        value: donor.lastDonated || '',
                                                         onChange: (e)=>setDonor((prev)=>({
                                                                     ...prev,
                                                                     lastDonated: e.target.value
@@ -32932,7 +32939,7 @@ const DonorDashboard = ()=>{
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                                         type: "text",
-                                                        value: donor.phone,
+                                                        value: donor.phone || '',
                                                         onChange: (e)=>setDonor((prev)=>({
                                                                     ...prev,
                                                                     phone: e.target.value
@@ -32962,7 +32969,7 @@ const DonorDashboard = ()=>{
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                                         type: "text",
-                                                        value: donor.zipCode,
+                                                        value: donor.zipCode || '',
                                                         onChange: (e)=>setDonor((prev)=>({
                                                                     ...prev,
                                                                     zipCode: e.target.value
@@ -33551,14 +33558,13 @@ const HospitalDashboard = ()=>{
     ]);
     (0, _react.useEffect)(()=>{
         const stored = localStorage.getItem('hospital');
-        if (stored) setHospital(JSON.parse(stored));
-        else setHospital({
-            name: 'St. Jude General Hospital',
-            email: 'admin@stjude.org',
-            licenseId: 'HOSP-77890',
-            adminName: 'Dr. Evelyn Martinez',
-            city: 'New York'
-        });
+        if (!stored) {
+            navigate('/', {
+                replace: true
+            });
+            return;
+        }
+        setHospital(JSON.parse(stored));
         // Load state from localStorage if exists
         const storedInventory = localStorage.getItem('blood_inventory');
         const storedDonors = localStorage.getItem('blood_donors');
@@ -33589,7 +33595,9 @@ const HospitalDashboard = ()=>{
     };
     const handleLogout = ()=>{
         localStorage.removeItem('hospital');
-        navigate('/login/hospital');
+        navigate('/login/hospital', {
+            replace: true
+        });
     };
     // Submit Emergency Request
     const handleSubmitRequest = (e)=>{
@@ -34079,14 +34087,14 @@ const HospitalDashboard = ()=>{
                 className: "absolute top-10 left-10 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl pointer-events-none network-pulse-glow"
             }, void 0, false, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 695,
+                lineNumber: 689,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "absolute bottom-10 right-10 w-96 h-96 bg-red-400/10 rounded-full blur-3xl pointer-events-none network-pulse-glow"
             }, void 0, false, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 696,
+                lineNumber: 690,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("style", {
@@ -34131,7 +34139,7 @@ const HospitalDashboard = ()=>{
       `
             }, void 0, false, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 699,
+                lineNumber: 693,
                 columnNumber: 7
             }, undefined),
             toast && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34144,25 +34152,25 @@ const HospitalDashboard = ()=>{
                             children: toast.type === 'error' ? "\u26A0\uFE0F" : toast.type === 'info' ? "\uD83D\uDCE2" : "\u2713"
                         }, void 0, false, {
                             fileName: "src/pages/HospitalDashboard.js",
-                            lineNumber: 747,
+                            lineNumber: 741,
                             columnNumber: 13
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                             children: toast.message
                         }, void 0, false, {
                             fileName: "src/pages/HospitalDashboard.js",
-                            lineNumber: 750,
+                            lineNumber: 744,
                             columnNumber: 13
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/pages/HospitalDashboard.js",
-                    lineNumber: 742,
+                    lineNumber: 736,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 741,
+                lineNumber: 735,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("header", {
@@ -34180,7 +34188,7 @@ const HospitalDashboard = ()=>{
                                         children: "\uD83E\uDE7A"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 762,
+                                        lineNumber: 756,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34188,13 +34196,13 @@ const HospitalDashboard = ()=>{
                                         children: "LifeLink Admin"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 763,
+                                        lineNumber: 757,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 761,
+                                lineNumber: 755,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34233,25 +34241,25 @@ const HospitalDashboard = ()=>{
                                                 children: tab.icon
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 786,
+                                                lineNumber: 780,
                                                 columnNumber: 19
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                 children: tab.name
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 787,
+                                                lineNumber: 781,
                                                 columnNumber: 19
                                             }, undefined)
                                         ]
                                     }, tab.id, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 777,
+                                        lineNumber: 771,
                                         columnNumber: 17
                                     }, undefined))
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 769,
+                                lineNumber: 763,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34265,7 +34273,7 @@ const HospitalDashboard = ()=>{
                                                 children: hospital.name || 'St. Jude General Hospital'
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 795,
+                                                lineNumber: 789,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34273,13 +34281,13 @@ const HospitalDashboard = ()=>{
                                                 children: hospital.licenseId || 'HOSP-77890'
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 796,
+                                                lineNumber: 790,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 794,
+                                        lineNumber: 788,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34287,7 +34295,7 @@ const HospitalDashboard = ()=>{
                                         children: hospital.name ? hospital.name.charAt(0) : 'H'
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 798,
+                                        lineNumber: 792,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -34296,29 +34304,29 @@ const HospitalDashboard = ()=>{
                                         children: "Logout"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 801,
+                                        lineNumber: 795,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 793,
+                                lineNumber: 787,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 758,
+                        lineNumber: 752,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/pages/HospitalDashboard.js",
-                    lineNumber: 757,
+                    lineNumber: 751,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 756,
+                lineNumber: 750,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
@@ -34360,25 +34368,25 @@ const HospitalDashboard = ()=>{
                                         children: tab.icon
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 834,
+                                        lineNumber: 828,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                         children: tab.name
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 835,
+                                        lineNumber: 829,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, tab.id, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 825,
+                                lineNumber: 819,
                                 columnNumber: 13
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 817,
+                        lineNumber: 811,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34395,7 +34403,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Active Emergency"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 846,
+                                                lineNumber: 840,
                                                 columnNumber: 15
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34403,13 +34411,13 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDEA8"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 847,
+                                                lineNumber: 841,
                                                 columnNumber: 15
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 845,
+                                        lineNumber: 839,
                                         columnNumber: 13
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34422,7 +34430,7 @@ const HospitalDashboard = ()=>{
                                                         children: activeAlertsCount
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 851,
+                                                        lineNumber: 845,
                                                         columnNumber: 17
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34430,13 +34438,13 @@ const HospitalDashboard = ()=>{
                                                         children: "Requests Pending"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 854,
+                                                        lineNumber: 848,
                                                         columnNumber: 17
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 850,
+                                                lineNumber: 844,
                                                 columnNumber: 15
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34444,26 +34452,26 @@ const HospitalDashboard = ()=>{
                                                 children: activeAlertsCount > 0 ? 'Requires immediate coordination & acceptance.' : 'All urgent requests responded to.'
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 856,
+                                                lineNumber: 850,
                                                 columnNumber: 15
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 849,
+                                        lineNumber: 843,
                                         columnNumber: 13
                                     }, undefined),
                                     activeAlertsCount > 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                         className: "absolute top-2 right-2 w-2 h-2 rounded-full bg-red-500 animate-ping"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 861,
+                                        lineNumber: 855,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 844,
+                                lineNumber: 838,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34477,7 +34485,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Active Donors (5-10km)"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 868,
+                                                lineNumber: 862,
                                                 columnNumber: 15
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34485,13 +34493,13 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDC65"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 869,
+                                                lineNumber: 863,
                                                 columnNumber: 15
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 867,
+                                        lineNumber: 861,
                                         columnNumber: 13
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34504,7 +34512,7 @@ const HospitalDashboard = ()=>{
                                                         children: donors.filter((d)=>d.distance <= 10 && d.eligible && d.status === 'Available').length
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 873,
+                                                        lineNumber: 867,
                                                         columnNumber: 17
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34512,13 +34520,13 @@ const HospitalDashboard = ()=>{
                                                         children: "Eligible & Ready"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 876,
+                                                        lineNumber: 870,
                                                         columnNumber: 17
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 872,
+                                                lineNumber: 866,
                                                 columnNumber: 15
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34526,19 +34534,19 @@ const HospitalDashboard = ()=>{
                                                 children: "Within direct response zone. Ready for dispatch."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 878,
+                                                lineNumber: 872,
                                                 columnNumber: 15
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 871,
+                                        lineNumber: 865,
                                         columnNumber: 13
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 866,
+                                lineNumber: 860,
                                 columnNumber: 11
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34552,7 +34560,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Stock Health"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 887,
+                                                lineNumber: 881,
                                                 columnNumber: 15
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34560,13 +34568,13 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83E\uDE78"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 888,
+                                                lineNumber: 882,
                                                 columnNumber: 15
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 886,
+                                        lineNumber: 880,
                                         columnNumber: 13
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34582,7 +34590,7 @@ const HospitalDashboard = ()=>{
                                                                 children: criticalStockCount
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 893,
+                                                                lineNumber: 887,
                                                                 columnNumber: 19
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34590,13 +34598,13 @@ const HospitalDashboard = ()=>{
                                                                 children: "Critical"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 894,
+                                                                lineNumber: 888,
                                                                 columnNumber: 19
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 892,
+                                                        lineNumber: 886,
                                                         columnNumber: 17
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34607,7 +34615,7 @@ const HospitalDashboard = ()=>{
                                                                 children: lowStockCount
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 897,
+                                                                lineNumber: 891,
                                                                 columnNumber: 19
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34615,13 +34623,13 @@ const HospitalDashboard = ()=>{
                                                                 children: "Low"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 898,
+                                                                lineNumber: 892,
                                                                 columnNumber: 19
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 896,
+                                                        lineNumber: 890,
                                                         columnNumber: 17
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34632,7 +34640,7 @@ const HospitalDashboard = ()=>{
                                                                 children: inventory.filter((i)=>i.status === 'Optimal').length
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 901,
+                                                                lineNumber: 895,
                                                                 columnNumber: 19
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34640,19 +34648,19 @@ const HospitalDashboard = ()=>{
                                                                 children: "Optimal"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 902,
+                                                                lineNumber: 896,
                                                                 columnNumber: 19
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 900,
+                                                        lineNumber: 894,
                                                         columnNumber: 17
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 891,
+                                                lineNumber: 885,
                                                 columnNumber: 15
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34662,32 +34670,32 @@ const HospitalDashboard = ()=>{
                                                         className: "w-1.5 h-1.5 rounded-full bg-red-500 mr-2 animate-pulse"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 906,
+                                                        lineNumber: 900,
                                                         columnNumber: 17
                                                     }, undefined),
                                                     "O- and AB- stocks require replenishment."
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 905,
+                                                lineNumber: 899,
                                                 columnNumber: 15
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 890,
+                                        lineNumber: 884,
                                         columnNumber: 13
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 885,
+                                lineNumber: 879,
                                 columnNumber: 11
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 841,
+                        lineNumber: 835,
                         columnNumber: 9
                     }, undefined),
                     activeTab === 'emergency' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34703,7 +34711,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Emergency Blood Dispatch Hub"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 923,
+                                                lineNumber: 917,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34711,13 +34719,13 @@ const HospitalDashboard = ()=>{
                                                 children: "Initiate instant broadcasts to nearby registered donors for patients in surgery or emergency wards."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 924,
+                                                lineNumber: 918,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 922,
+                                        lineNumber: 916,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -34728,26 +34736,26 @@ const HospitalDashboard = ()=>{
                                                 children: "\u2795"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 930,
+                                                lineNumber: 924,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                 children: "Send Emergency Blood Request"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 931,
+                                                lineNumber: 925,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 926,
+                                        lineNumber: 920,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 921,
+                                lineNumber: 915,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34760,14 +34768,14 @@ const HospitalDashboard = ()=>{
                                                 className: "w-2.5 h-2.5 rounded-full bg-red-500 mr-2 animate-ping"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 938,
+                                                lineNumber: 932,
                                                 columnNumber: 17
                                             }, undefined),
                                             "Active Donation Cycles & Tracker Pipelines"
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 937,
+                                        lineNumber: 931,
                                         columnNumber: 15
                                     }, undefined),
                                     activeRequests.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34778,7 +34786,7 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83C\uDF89"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 944,
+                                                lineNumber: 938,
                                                 columnNumber: 19
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34786,13 +34794,13 @@ const HospitalDashboard = ()=>{
                                                 children: "All emergency requests completed and stabilized."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 945,
+                                                lineNumber: 939,
                                                 columnNumber: 19
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 943,
+                                        lineNumber: 937,
                                         columnNumber: 17
                                     }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                         className: "space-y-6",
@@ -34812,7 +34820,7 @@ const HospitalDashboard = ()=>{
                                                                                 children: req.patient
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 956,
+                                                                                lineNumber: 950,
                                                                                 columnNumber: 29
                                                                             }, undefined),
                                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34820,7 +34828,7 @@ const HospitalDashboard = ()=>{
                                                                                 children: req.urgency
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 957,
+                                                                                lineNumber: 951,
                                                                                 columnNumber: 29
                                                                             }, undefined),
                                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -34828,13 +34836,13 @@ const HospitalDashboard = ()=>{
                                                                                 children: req.ward
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 960,
+                                                                                lineNumber: 954,
                                                                                 columnNumber: 29
                                                                             }, undefined)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 955,
+                                                                        lineNumber: 949,
                                                                         columnNumber: 27
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34846,19 +34854,19 @@ const HospitalDashboard = ()=>{
                                                                                 children: req.notes || 'None'
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 962,
+                                                                                lineNumber: 956,
                                                                                 columnNumber: 91
                                                                             }, undefined)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 962,
+                                                                        lineNumber: 956,
                                                                         columnNumber: 27
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 954,
+                                                                lineNumber: 948,
                                                                 columnNumber: 25
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34871,7 +34879,7 @@ const HospitalDashboard = ()=>{
                                                                                 children: "Required Blood"
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 966,
+                                                                                lineNumber: 960,
                                                                                 columnNumber: 29
                                                                             }, undefined),
                                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34884,13 +34892,13 @@ const HospitalDashboard = ()=>{
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 967,
+                                                                                lineNumber: 961,
                                                                                 columnNumber: 29
                                                                             }, undefined)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 965,
+                                                                        lineNumber: 959,
                                                                         columnNumber: 27
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34900,7 +34908,7 @@ const HospitalDashboard = ()=>{
                                                                                 children: "Donor Assigned"
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 970,
+                                                                                lineNumber: 964,
                                                                                 columnNumber: 29
                                                                             }, undefined),
                                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -34908,25 +34916,25 @@ const HospitalDashboard = ()=>{
                                                                                 children: req.donor
                                                                             }, void 0, false, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 971,
+                                                                                lineNumber: 965,
                                                                                 columnNumber: 29
                                                                             }, undefined)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 969,
+                                                                        lineNumber: 963,
                                                                         columnNumber: 27
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 964,
+                                                                lineNumber: 958,
                                                                 columnNumber: 25
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 953,
+                                                        lineNumber: 947,
                                                         columnNumber: 23
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34941,7 +34949,7 @@ const HospitalDashboard = ()=>{
                                                                             className: "absolute left-[3%] right-[3%] top-[40%] h-1 bg-slate-200 z-0 rounded-full"
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 983,
+                                                                            lineNumber: 977,
                                                                             columnNumber: 29
                                                                         }, undefined),
                                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -34951,7 +34959,7 @@ const HospitalDashboard = ()=>{
                                                                             }
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 984,
+                                                                            lineNumber: 978,
                                                                             columnNumber: 29
                                                                         }, undefined),
                                                                         [
@@ -34987,12 +34995,12 @@ const HospitalDashboard = ()=>{
                                                                                             children: stepItem.icon
                                                                                         }, void 0, false, {
                                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                                            lineNumber: 1002,
+                                                                                            lineNumber: 996,
                                                                                             columnNumber: 37
                                                                                         }, undefined)
                                                                                     }, void 0, false, {
                                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                                        lineNumber: 997,
+                                                                                        lineNumber: 991,
                                                                                         columnNumber: 35
                                                                                     }, undefined),
                                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35000,20 +35008,20 @@ const HospitalDashboard = ()=>{
                                                                                         children: stepItem.label
                                                                                     }, void 0, false, {
                                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                                        lineNumber: 1004,
+                                                                                        lineNumber: 998,
                                                                                         columnNumber: 35
                                                                                     }, undefined)
                                                                                 ]
                                                                             }, sIdx, true, {
                                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                                lineNumber: 996,
+                                                                                lineNumber: 990,
                                                                                 columnNumber: 33
                                                                             }, undefined);
                                                                         })
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 981,
+                                                                    lineNumber: 975,
                                                                     columnNumber: 27
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -35024,54 +35032,54 @@ const HospitalDashboard = ()=>{
                                                                             children: "\u2699\uFE0F"
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1021,
+                                                                            lineNumber: 1015,
                                                                             columnNumber: 29
                                                                         }, undefined),
                                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                                             children: req.step === 0 ? 'Accept Donor' : req.step === 1 ? 'Start Transit' : req.step === 2 ? 'Mark Arrived' : 'Verify & Complete'
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1022,
+                                                                            lineNumber: 1016,
                                                                             columnNumber: 29
                                                                         }, undefined)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1017,
+                                                                    lineNumber: 1011,
                                                                     columnNumber: 27
                                                                 }, undefined)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                            lineNumber: 978,
+                                                            lineNumber: 972,
                                                             columnNumber: 25
                                                         }, undefined)
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 977,
+                                                        lineNumber: 971,
                                                         columnNumber: 23
                                                     }, undefined)
                                                 ]
                                             }, req.id, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 950,
+                                                lineNumber: 944,
                                                 columnNumber: 21
                                             }, undefined))
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 948,
+                                        lineNumber: 942,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 936,
+                                lineNumber: 930,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 918,
+                        lineNumber: 912,
                         columnNumber: 11
                     }, undefined),
                     activeTab === 'map' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35087,7 +35095,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Interactive Live Donor Map"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1046,
+                                                lineNumber: 1040,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35095,13 +35103,13 @@ const HospitalDashboard = ()=>{
                                                 children: "Visualize nearby registered donors. Filter by radius, compatibility, and readiness. Dispatch couriers instantly."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1047,
+                                                lineNumber: 1041,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1045,
+                                        lineNumber: 1039,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35114,7 +35122,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Radius (Distance)"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1053,
+                                                        lineNumber: 1047,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -35127,7 +35135,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "5 km Radius"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1059,
+                                                                lineNumber: 1053,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -35135,7 +35143,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "10 km Radius"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1060,
+                                                                lineNumber: 1054,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -35143,19 +35151,19 @@ const HospitalDashboard = ()=>{
                                                                 children: "20 km Radius"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1061,
+                                                                lineNumber: 1055,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1054,
+                                                        lineNumber: 1048,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1052,
+                                                lineNumber: 1046,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35165,7 +35173,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Blood Type"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1066,
+                                                        lineNumber: 1060,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -35178,7 +35186,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "All Groups"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1072,
+                                                                lineNumber: 1066,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             [
@@ -35195,19 +35203,19 @@ const HospitalDashboard = ()=>{
                                                                     children: g
                                                                 }, g, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1074,
+                                                                    lineNumber: 1068,
                                                                     columnNumber: 23
                                                                 }, undefined))
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1067,
+                                                        lineNumber: 1061,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1065,
+                                                lineNumber: 1059,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35217,7 +35225,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Availability"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1080,
+                                                        lineNumber: 1074,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -35230,7 +35238,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "All Status"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1086,
+                                                                lineNumber: 1080,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -35238,7 +35246,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Available"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1087,
+                                                                lineNumber: 1081,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -35246,7 +35254,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "In-Transit"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1088,
+                                                                lineNumber: 1082,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -35254,31 +35262,31 @@ const HospitalDashboard = ()=>{
                                                                 children: "Busy"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1089,
+                                                                lineNumber: 1083,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1081,
+                                                        lineNumber: 1075,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1079,
+                                                lineNumber: 1073,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1051,
+                                        lineNumber: 1045,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1044,
+                                lineNumber: 1038,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35304,7 +35312,7 @@ const HospitalDashboard = ()=>{
                                                                 strokeWidth: "0.5"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1107,
+                                                                lineNumber: 1101,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("circle", {
@@ -35316,7 +35324,7 @@ const HospitalDashboard = ()=>{
                                                                 strokeWidth: "0.5"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1108,
+                                                                lineNumber: 1102,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("circle", {
@@ -35328,7 +35336,7 @@ const HospitalDashboard = ()=>{
                                                                 strokeWidth: "0.5"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1109,
+                                                                lineNumber: 1103,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("line", {
@@ -35341,7 +35349,7 @@ const HospitalDashboard = ()=>{
                                                                 strokeDasharray: "2,2"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1112,
+                                                                lineNumber: 1106,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("line", {
@@ -35354,13 +35362,13 @@ const HospitalDashboard = ()=>{
                                                                 strokeDasharray: "2,2"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1113,
+                                                                lineNumber: 1107,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1105,
+                                                        lineNumber: 1099,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35368,7 +35376,7 @@ const HospitalDashboard = ()=>{
                                                         children: "5 km"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1117,
+                                                        lineNumber: 1111,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35376,7 +35384,7 @@ const HospitalDashboard = ()=>{
                                                         children: "10 km"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1118,
+                                                        lineNumber: 1112,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35384,7 +35392,7 @@ const HospitalDashboard = ()=>{
                                                         children: "20 km"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1119,
+                                                        lineNumber: 1113,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35397,12 +35405,12 @@ const HospitalDashboard = ()=>{
                                                                     children: "\uD83C\uDFE5"
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1124,
+                                                                    lineNumber: 1118,
                                                                     columnNumber: 23
                                                                 }, undefined)
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1123,
+                                                                lineNumber: 1117,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35410,13 +35418,13 @@ const HospitalDashboard = ()=>{
                                                                 children: "ST. JUDE"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1126,
+                                                                lineNumber: 1120,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1122,
+                                                        lineNumber: 1116,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     filteredDonors.map((donor)=>{
@@ -35439,7 +35447,7 @@ const HospitalDashboard = ()=>{
                                                                         className: "absolute inline-flex h-6 w-6 rounded-full bg-emerald-500/20 animate-ping"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1149,
+                                                                        lineNumber: 1143,
                                                                         columnNumber: 29
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35449,12 +35457,12 @@ const HospitalDashboard = ()=>{
                                                                             children: donor.bloodType
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1156,
+                                                                            lineNumber: 1150,
                                                                             columnNumber: 29
                                                                         }, undefined)
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1153,
+                                                                        lineNumber: 1147,
                                                                         columnNumber: 27
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35467,25 +35475,25 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1160,
+                                                                        lineNumber: 1154,
                                                                         columnNumber: 27
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1146,
+                                                                lineNumber: 1140,
                                                                 columnNumber: 25
                                                             }, undefined)
                                                         }, donor.id, false, {
                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                            lineNumber: 1140,
+                                                            lineNumber: 1134,
                                                             columnNumber: 23
                                                         }, undefined);
                                                     })
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1102,
+                                                lineNumber: 1096,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35495,7 +35503,7 @@ const HospitalDashboard = ()=>{
                                                         children: "\uD83D\uDDFA\uFE0F St. Jude Center coordinates mapping"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1171,
+                                                        lineNumber: 1165,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35508,14 +35516,14 @@ const HospitalDashboard = ()=>{
                                                                         className: "w-2 h-2 rounded-full bg-emerald-500 mr-1.5"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1173,
+                                                                        lineNumber: 1167,
                                                                         columnNumber: 57
                                                                     }, undefined),
                                                                     " Ready"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1173,
+                                                                lineNumber: 1167,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35525,14 +35533,14 @@ const HospitalDashboard = ()=>{
                                                                         className: "w-2 h-2 rounded-full bg-blue-500 mr-1.5"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1174,
+                                                                        lineNumber: 1168,
                                                                         columnNumber: 57
                                                                     }, undefined),
                                                                     " Dispatch/Transit"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1174,
+                                                                lineNumber: 1168,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35542,32 +35550,32 @@ const HospitalDashboard = ()=>{
                                                                         className: "w-2 h-2 rounded-full bg-red-500 mr-1.5"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1175,
+                                                                        lineNumber: 1169,
                                                                         columnNumber: 57
                                                                     }, undefined),
                                                                     " Busy/Resting"
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1175,
+                                                                lineNumber: 1169,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1172,
+                                                        lineNumber: 1166,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1170,
+                                                lineNumber: 1164,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1099,
+                                        lineNumber: 1093,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35587,7 +35595,7 @@ const HospitalDashboard = ()=>{
                                                                         children: selectedDonor.name
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1188,
+                                                                        lineNumber: 1182,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35598,13 +35606,13 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1189,
+                                                                        lineNumber: 1183,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1187,
+                                                                lineNumber: 1181,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35615,13 +35623,13 @@ const HospitalDashboard = ()=>{
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1193,
+                                                                lineNumber: 1187,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1186,
+                                                        lineNumber: 1180,
                                                         columnNumber: 21
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35635,7 +35643,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Proximity Range:"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1198,
+                                                                        lineNumber: 1192,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
@@ -35646,13 +35654,13 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1199,
+                                                                        lineNumber: 1193,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1197,
+                                                                lineNumber: 1191,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35663,7 +35671,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Availability Status:"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1203,
+                                                                        lineNumber: 1197,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35671,13 +35679,13 @@ const HospitalDashboard = ()=>{
                                                                         children: selectedDonor.status
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1204,
+                                                                        lineNumber: 1198,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1202,
+                                                                lineNumber: 1196,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35688,7 +35696,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Last Donation:"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1214,
+                                                                        lineNumber: 1208,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
@@ -35696,13 +35704,13 @@ const HospitalDashboard = ()=>{
                                                                         children: selectedDonor.lastDonated
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1215,
+                                                                        lineNumber: 1209,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1213,
+                                                                lineNumber: 1207,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35713,7 +35721,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Eligibility Check:"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1219,
+                                                                        lineNumber: 1213,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35721,13 +35729,13 @@ const HospitalDashboard = ()=>{
                                                                         children: selectedDonor.eligible ? "\u2713 Eligible for Donation" : "\uD83D\uDDD9 Ineligible (90-day timer)"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1220,
+                                                                        lineNumber: 1214,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1218,
+                                                                lineNumber: 1212,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35738,7 +35746,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Secure Contact:"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1226,
+                                                                        lineNumber: 1220,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
@@ -35746,19 +35754,19 @@ const HospitalDashboard = ()=>{
                                                                         children: selectedDonor.phone
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1227,
+                                                                        lineNumber: 1221,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1225,
+                                                                lineNumber: 1219,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1196,
+                                                        lineNumber: 1190,
                                                         columnNumber: 21
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35771,7 +35779,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "\u26A1 Dispatch Push Notification"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1232,
+                                                                lineNumber: 1226,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -35783,19 +35791,19 @@ const HospitalDashboard = ()=>{
                                                                 children: "\uD83D\uDCCB Proceed to Check-In Verification"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1243,
+                                                                lineNumber: 1237,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1231,
+                                                        lineNumber: 1225,
                                                         columnNumber: 21
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1184,
+                                                lineNumber: 1178,
                                                 columnNumber: 19
                                             }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                                 className: "flex flex-col items-center justify-center flex-grow text-center text-slate-500 py-12",
@@ -35805,7 +35813,7 @@ const HospitalDashboard = ()=>{
                                                         children: "\uD83D\uDCCD"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1257,
+                                                        lineNumber: 1251,
                                                         columnNumber: 21
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35813,7 +35821,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Select a Donor pin on the map"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1258,
+                                                        lineNumber: 1252,
                                                         columnNumber: 21
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35821,13 +35829,13 @@ const HospitalDashboard = ()=>{
                                                         children: "View detailed profile data, proximity metrics, and trigger direct notification requests."
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1259,
+                                                        lineNumber: 1253,
                                                         columnNumber: 21
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1256,
+                                                lineNumber: 1250,
                                                 columnNumber: 19
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -35836,25 +35844,25 @@ const HospitalDashboard = ()=>{
                                                 children: "Clear Selection"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1263,
+                                                lineNumber: 1257,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1182,
+                                        lineNumber: 1176,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1096,
+                                lineNumber: 1090,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1043,
+                        lineNumber: 1037,
                         columnNumber: 11
                     }, undefined),
                     activeTab === 'inventory' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35870,7 +35878,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Blood Bank Reserve Inventory"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1282,
+                                                lineNumber: 1276,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -35878,13 +35886,13 @@ const HospitalDashboard = ()=>{
                                                 children: "Monitor live bags on site. Log fresh donor packages and flag expired batches."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1283,
+                                                lineNumber: 1277,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1281,
+                                        lineNumber: 1275,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -35895,26 +35903,26 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDCE5"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1289,
+                                                lineNumber: 1283,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                 children: "Log Incoming Donation"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1290,
+                                                lineNumber: 1284,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1285,
+                                        lineNumber: 1279,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1280,
+                                lineNumber: 1274,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35929,7 +35937,7 @@ const HospitalDashboard = ()=>{
                                                 className: `absolute bottom-0 left-0 right-0 h-1 ${isCritical ? 'bg-red-500 animate-pulse' : isLow ? 'bg-amber-500' : 'bg-emerald-500'}`
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1304,
+                                                lineNumber: 1298,
                                                 columnNumber: 21
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35940,7 +35948,7 @@ const HospitalDashboard = ()=>{
                                                         children: inv.type
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1310,
+                                                        lineNumber: 1304,
                                                         columnNumber: 23
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35948,13 +35956,13 @@ const HospitalDashboard = ()=>{
                                                         children: inv.status
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1311,
+                                                        lineNumber: 1305,
                                                         columnNumber: 23
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1309,
+                                                lineNumber: 1303,
                                                 columnNumber: 21
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -35965,7 +35973,7 @@ const HospitalDashboard = ()=>{
                                                         children: inv.units
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1321,
+                                                        lineNumber: 1315,
                                                         columnNumber: 23
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -35973,13 +35981,13 @@ const HospitalDashboard = ()=>{
                                                         children: "Units"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1322,
+                                                        lineNumber: 1316,
                                                         columnNumber: 23
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1320,
+                                                lineNumber: 1314,
                                                 columnNumber: 21
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36005,7 +36013,7 @@ const HospitalDashboard = ()=>{
                                                         children: "-1u"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1327,
+                                                        lineNumber: 1321,
                                                         columnNumber: 23
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -36028,25 +36036,25 @@ const HospitalDashboard = ()=>{
                                                         children: "+1u"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1343,
+                                                        lineNumber: 1337,
                                                         columnNumber: 23
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1326,
+                                                lineNumber: 1320,
                                                 columnNumber: 21
                                             }, undefined)
                                         ]
                                     }, inv.type, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1301,
+                                        lineNumber: 1295,
                                         columnNumber: 19
                                     }, undefined);
                                 })
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1295,
+                                lineNumber: 1289,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36059,7 +36067,7 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDCCB"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1369,
+                                                lineNumber: 1363,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -36067,13 +36075,13 @@ const HospitalDashboard = ()=>{
                                                 children: "Specific Batches & Blood Packs Tracker"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1370,
+                                                lineNumber: 1364,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1368,
+                                        lineNumber: 1362,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36090,7 +36098,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Batch ID"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1377,
+                                                                lineNumber: 1371,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -36098,7 +36106,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Blood Type"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1378,
+                                                                lineNumber: 1372,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -36106,7 +36114,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Units"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1379,
+                                                                lineNumber: 1373,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -36114,7 +36122,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Expiry Date"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1380,
+                                                                lineNumber: 1374,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -36122,7 +36130,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Batch Status"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1381,
+                                                                lineNumber: 1375,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -36130,18 +36138,18 @@ const HospitalDashboard = ()=>{
                                                                 children: "Actions"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1382,
+                                                                lineNumber: 1376,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1376,
+                                                        lineNumber: 1370,
                                                         columnNumber: 21
                                                     }, undefined)
                                                 }, void 0, false, {
                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                    lineNumber: 1375,
+                                                    lineNumber: 1369,
                                                     columnNumber: 19
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
@@ -36157,7 +36165,7 @@ const HospitalDashboard = ()=>{
                                                                     children: batch.id
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1392,
+                                                                    lineNumber: 1386,
                                                                     columnNumber: 27
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -36170,12 +36178,12 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1396,
+                                                                        lineNumber: 1390,
                                                                         columnNumber: 29
                                                                     }, undefined)
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1395,
+                                                                    lineNumber: 1389,
                                                                     columnNumber: 27
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -36186,7 +36194,7 @@ const HospitalDashboard = ()=>{
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1400,
+                                                                    lineNumber: 1394,
                                                                     columnNumber: 27
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -36198,7 +36206,7 @@ const HospitalDashboard = ()=>{
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1403,
+                                                                    lineNumber: 1397,
                                                                     columnNumber: 27
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -36208,12 +36216,12 @@ const HospitalDashboard = ()=>{
                                                                         children: isExpired ? 'Expired' : batch.status
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1407,
+                                                                        lineNumber: 1401,
                                                                         columnNumber: 29
                                                                     }, undefined)
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1406,
+                                                                    lineNumber: 1400,
                                                                     columnNumber: 27
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -36224,47 +36232,47 @@ const HospitalDashboard = ()=>{
                                                                         children: "Discard & Deduct"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1416,
+                                                                        lineNumber: 1410,
                                                                         columnNumber: 29
                                                                     }, undefined)
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1415,
+                                                                    lineNumber: 1409,
                                                                     columnNumber: 27
                                                                 }, undefined)
                                                             ]
                                                         }, batch.id, true, {
                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                            lineNumber: 1391,
+                                                            lineNumber: 1385,
                                                             columnNumber: 25
                                                         }, undefined);
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                    lineNumber: 1385,
+                                                    lineNumber: 1379,
                                                     columnNumber: 19
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/pages/HospitalDashboard.js",
-                                            lineNumber: 1374,
+                                            lineNumber: 1368,
                                             columnNumber: 17
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1373,
+                                        lineNumber: 1367,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1367,
+                                lineNumber: 1361,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1277,
+                        lineNumber: 1271,
                         columnNumber: 11
                     }, undefined),
                     activeTab === 'verification' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36282,7 +36290,7 @@ const HospitalDashboard = ()=>{
                                                         children: "\uD83D\uDCCB"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1442,
+                                                        lineNumber: 1436,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -36290,13 +36298,13 @@ const HospitalDashboard = ()=>{
                                                         children: "Donor Check-in & Verification"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1443,
+                                                        lineNumber: 1437,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1441,
+                                                lineNumber: 1435,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -36304,7 +36312,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Verify arriving donors at the triage center. Record actual blood volume collected, reset eligibility timers, and mark requests completed."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1445,
+                                                lineNumber: 1439,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -36318,7 +36326,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Verify Donor (Select/Input ID or Name)"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1449,
+                                                                lineNumber: 1443,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -36332,7 +36340,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "-- Choose Arrived Donor --"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1456,
+                                                                        lineNumber: 1450,
                                                                         columnNumber: 23
                                                                     }, undefined),
                                                                     donors.map((d)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -36349,19 +36357,19 @@ const HospitalDashboard = ()=>{
                                                                             ]
                                                                         }, d.id, true, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1458,
+                                                                            lineNumber: 1452,
                                                                             columnNumber: 25
                                                                         }, undefined))
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1450,
+                                                                lineNumber: 1444,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1448,
+                                                        lineNumber: 1442,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36374,7 +36382,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Volume Extracted (ml)"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1467,
+                                                                        lineNumber: 1461,
                                                                         columnNumber: 23
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36386,13 +36394,13 @@ const HospitalDashboard = ()=>{
                                                                         className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-700"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1468,
+                                                                        lineNumber: 1462,
                                                                         columnNumber: 23
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1466,
+                                                                lineNumber: 1460,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36402,7 +36410,7 @@ const HospitalDashboard = ()=>{
                                                                         children: "Estimated Unit Output"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1478,
+                                                                        lineNumber: 1472,
                                                                         columnNumber: 23
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -36412,19 +36420,19 @@ const HospitalDashboard = ()=>{
                                                                         className: "w-full px-4 py-3 bg-slate-100 border border-slate-200 rounded-xl text-sm text-slate-500 cursor-not-allowed font-semibold"
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1479,
+                                                                        lineNumber: 1473,
                                                                         columnNumber: 23
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1477,
+                                                                lineNumber: 1471,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1465,
+                                                        lineNumber: 1459,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36434,7 +36442,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Verification / Clinical Notes"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1489,
+                                                                lineNumber: 1483,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("textarea", {
@@ -36445,13 +36453,13 @@ const HospitalDashboard = ()=>{
                                                                 className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-700"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1490,
+                                                                lineNumber: 1484,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1488,
+                                                        lineNumber: 1482,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -36460,19 +36468,19 @@ const HospitalDashboard = ()=>{
                                                         children: "\u2713 Complete Check-in & Log Blood Donation"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1499,
+                                                        lineNumber: 1493,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1447,
+                                                lineNumber: 1441,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1440,
+                                        lineNumber: 1434,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36483,7 +36491,7 @@ const HospitalDashboard = ()=>{
                                                 children: "90-Day Eligibility Rule"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1509,
+                                                lineNumber: 1503,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -36491,19 +36499,19 @@ const HospitalDashboard = ()=>{
                                                 children: 'Completing check-in will automatically flag this donor as "Recently Donated". This triggers an automated 90-day block on their availability, ensuring compliance with clinical safety windows.'
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1510,
+                                                lineNumber: 1504,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1508,
+                                        lineNumber: 1502,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1439,
+                                lineNumber: 1433,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36516,7 +36524,7 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDCE2 Dispatched Donor Status"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1519,
+                                                lineNumber: 1513,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36533,7 +36541,7 @@ const HospitalDashboard = ()=>{
                                                                             children: donor.status === 'Arrived' ? "\uD83C\uDFE5" : "\uD83D\uDE91"
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1524,
+                                                                            lineNumber: 1518,
                                                                             columnNumber: 25
                                                                         }, undefined),
                                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36543,7 +36551,7 @@ const HospitalDashboard = ()=>{
                                                                                     children: donor.name
                                                                                 }, void 0, false, {
                                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                                    lineNumber: 1528,
+                                                                                    lineNumber: 1522,
                                                                                     columnNumber: 27
                                                                                 }, undefined),
                                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -36556,19 +36564,19 @@ const HospitalDashboard = ()=>{
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                                    lineNumber: 1529,
+                                                                                    lineNumber: 1523,
                                                                                     columnNumber: 27
                                                                                 }, undefined)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1527,
+                                                                            lineNumber: 1521,
                                                                             columnNumber: 25
                                                                         }, undefined)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1523,
+                                                                    lineNumber: 1517,
                                                                     columnNumber: 23
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36579,7 +36587,7 @@ const HospitalDashboard = ()=>{
                                                                             children: donor.status
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1534,
+                                                                            lineNumber: 1528,
                                                                             columnNumber: 25
                                                                         }, undefined),
                                                                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -36590,19 +36598,19 @@ const HospitalDashboard = ()=>{
                                                                             children: "Fill Form"
                                                                         }, void 0, false, {
                                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                                            lineNumber: 1540,
+                                                                            lineNumber: 1534,
                                                                             columnNumber: 25
                                                                         }, undefined)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1533,
+                                                                    lineNumber: 1527,
                                                                     columnNumber: 23
                                                                 }, undefined)
                                                             ]
                                                         }, donor.id, true, {
                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                            lineNumber: 1522,
+                                                            lineNumber: 1516,
                                                             columnNumber: 21
                                                         }, undefined)),
                                                     donors.filter((d)=>d.status === 'In-Transit' || d.status === 'Arrived').length === 0 && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -36610,19 +36618,19 @@ const HospitalDashboard = ()=>{
                                                         children: "No donors are currently in transit or waiting at check-in."
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1552,
+                                                        lineNumber: 1546,
                                                         columnNumber: 21
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1520,
+                                                lineNumber: 1514,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1518,
+                                        lineNumber: 1512,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36633,7 +36641,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Emergency Protocol"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1558,
+                                                lineNumber: 1552,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -36641,25 +36649,25 @@ const HospitalDashboard = ()=>{
                                                 children: "In case of urgent walk-in donors not listed in the directory, log their registration first using the registry system, or input custom ID DN-TEMP for fast tracking."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1559,
+                                                lineNumber: 1553,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1557,
+                                        lineNumber: 1551,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1517,
+                                lineNumber: 1511,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1436,
+                        lineNumber: 1430,
                         columnNumber: 11
                     }, undefined),
                     activeTab === 'reports' && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36675,7 +36683,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Coordination Reports & Fulfillment History"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1575,
+                                                lineNumber: 1569,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -36683,13 +36691,13 @@ const HospitalDashboard = ()=>{
                                                 children: "Download official audits, track average donor response speeds, and check stock distribution logs."
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1576,
+                                                lineNumber: 1570,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1574,
+                                        lineNumber: 1568,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36703,20 +36711,20 @@ const HospitalDashboard = ()=>{
                                                         children: "\uD83D\uDCCA"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1583,
+                                                        lineNumber: 1577,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                         children: "Export CSV"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1584,
+                                                        lineNumber: 1578,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1579,
+                                                lineNumber: 1573,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -36727,32 +36735,32 @@ const HospitalDashboard = ()=>{
                                                         children: "\uD83D\uDCC4"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1590,
+                                                        lineNumber: 1584,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                                         children: "Print PDF Report"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1591,
+                                                        lineNumber: 1585,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1586,
+                                                lineNumber: 1580,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1578,
+                                        lineNumber: 1572,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1573,
+                                lineNumber: 1567,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36766,7 +36774,7 @@ const HospitalDashboard = ()=>{
                                                 children: "\u23F1\uFE0F Avg. Donor Response Time (by blood type)"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1601,
+                                                lineNumber: 1595,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36805,7 +36813,7 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1611,
+                                                                        lineNumber: 1605,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
@@ -36816,13 +36824,13 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1612,
+                                                                        lineNumber: 1606,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1610,
+                                                                lineNumber: 1604,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36834,29 +36842,29 @@ const HospitalDashboard = ()=>{
                                                                     }
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1615,
+                                                                    lineNumber: 1609,
                                                                     columnNumber: 25
                                                                 }, undefined)
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1614,
+                                                                lineNumber: 1608,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, chartRow.type, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1609,
+                                                        lineNumber: 1603,
                                                         columnNumber: 21
                                                     }, undefined))
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1602,
+                                                lineNumber: 1596,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1600,
+                                        lineNumber: 1594,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36867,7 +36875,7 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDCC8 Weekly Blood Volume Distribution (Units)"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1624,
+                                                lineNumber: 1618,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36901,7 +36909,7 @@ const HospitalDashboard = ()=>{
                                                                         children: chartRow.type
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1633,
+                                                                        lineNumber: 1627,
                                                                         columnNumber: 25
                                                                     }, undefined),
                                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
@@ -36912,13 +36920,13 @@ const HospitalDashboard = ()=>{
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1634,
+                                                                        lineNumber: 1628,
                                                                         columnNumber: 25
                                                                     }, undefined)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1632,
+                                                                lineNumber: 1626,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36930,35 +36938,35 @@ const HospitalDashboard = ()=>{
                                                                     }
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1637,
+                                                                    lineNumber: 1631,
                                                                     columnNumber: 25
                                                                 }, undefined)
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1636,
+                                                                lineNumber: 1630,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, chartRow.type, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1631,
+                                                        lineNumber: 1625,
                                                         columnNumber: 21
                                                     }, undefined))
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1625,
+                                                lineNumber: 1619,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1623,
+                                        lineNumber: 1617,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1597,
+                                lineNumber: 1591,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -36971,7 +36979,7 @@ const HospitalDashboard = ()=>{
                                                 children: "\uD83D\uDD70\uFE0F"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1649,
+                                                lineNumber: 1643,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
@@ -36979,13 +36987,13 @@ const HospitalDashboard = ()=>{
                                                 children: "Fulfilled Request Audit History"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1650,
+                                                lineNumber: 1644,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1648,
+                                        lineNumber: 1642,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37002,7 +37010,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Case ID"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1657,
+                                                                lineNumber: 1651,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37010,7 +37018,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Date"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1658,
+                                                                lineNumber: 1652,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37018,7 +37026,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Patient"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1659,
+                                                                lineNumber: 1653,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37026,7 +37034,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Blood Type"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1660,
+                                                                lineNumber: 1654,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37034,7 +37042,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Units"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1661,
+                                                                lineNumber: 1655,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37042,7 +37050,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Urgency"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1662,
+                                                                lineNumber: 1656,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37050,7 +37058,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Verified Donor"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1663,
+                                                                lineNumber: 1657,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37058,7 +37066,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "Response Time"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1664,
+                                                                lineNumber: 1658,
                                                                 columnNumber: 23
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("th", {
@@ -37066,18 +37074,18 @@ const HospitalDashboard = ()=>{
                                                                 children: "Fulfillment"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1665,
+                                                                lineNumber: 1659,
                                                                 columnNumber: 23
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1656,
+                                                        lineNumber: 1650,
                                                         columnNumber: 21
                                                     }, undefined)
                                                 }, void 0, false, {
                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                    lineNumber: 1655,
+                                                    lineNumber: 1649,
                                                     columnNumber: 19
                                                 }, undefined),
                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("tbody", {
@@ -37090,7 +37098,7 @@ const HospitalDashboard = ()=>{
                                                                     children: row.id
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1671,
+                                                                    lineNumber: 1665,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37098,7 +37106,7 @@ const HospitalDashboard = ()=>{
                                                                     children: row.date
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1674,
+                                                                    lineNumber: 1668,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37106,7 +37114,7 @@ const HospitalDashboard = ()=>{
                                                                     children: row.patient
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1677,
+                                                                    lineNumber: 1671,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37116,12 +37124,12 @@ const HospitalDashboard = ()=>{
                                                                         children: row.bloodType
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1681,
+                                                                        lineNumber: 1675,
                                                                         columnNumber: 27
                                                                     }, undefined)
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1680,
+                                                                    lineNumber: 1674,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37132,7 +37140,7 @@ const HospitalDashboard = ()=>{
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1685,
+                                                                    lineNumber: 1679,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37142,12 +37150,12 @@ const HospitalDashboard = ()=>{
                                                                         children: row.urgency
                                                                     }, void 0, false, {
                                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                                        lineNumber: 1689,
+                                                                        lineNumber: 1683,
                                                                         columnNumber: 27
                                                                     }, undefined)
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1688,
+                                                                    lineNumber: 1682,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37155,7 +37163,7 @@ const HospitalDashboard = ()=>{
                                                                     children: row.donor
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1695,
+                                                                    lineNumber: 1689,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37163,7 +37171,7 @@ const HospitalDashboard = ()=>{
                                                                     children: row.responseTime
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1698,
+                                                                    lineNumber: 1692,
                                                                     columnNumber: 25
                                                                 }, undefined),
                                                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("td", {
@@ -37171,59 +37179,59 @@ const HospitalDashboard = ()=>{
                                                                     children: "\u2713 Completed"
                                                                 }, void 0, false, {
                                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                                    lineNumber: 1701,
+                                                                    lineNumber: 1695,
                                                                     columnNumber: 25
                                                                 }, undefined)
                                                             ]
                                                         }, row.id, true, {
                                                             fileName: "src/pages/HospitalDashboard.js",
-                                                            lineNumber: 1670,
+                                                            lineNumber: 1664,
                                                             columnNumber: 23
                                                         }, undefined))
                                                 }, void 0, false, {
                                                     fileName: "src/pages/HospitalDashboard.js",
-                                                    lineNumber: 1668,
+                                                    lineNumber: 1662,
                                                     columnNumber: 19
                                                 }, undefined)
                                             ]
                                         }, void 0, true, {
                                             fileName: "src/pages/HospitalDashboard.js",
-                                            lineNumber: 1654,
+                                            lineNumber: 1648,
                                             columnNumber: 17
                                         }, undefined)
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1653,
+                                        lineNumber: 1647,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1647,
+                                lineNumber: 1641,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1570,
+                        lineNumber: 1564,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 814,
+                lineNumber: 808,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("footer", {
                 className: "w-full relative z-10 mt-12 bg-white/30 border-t border-slate-200/60 backdrop-blur",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _footerDefault.default), {}, void 0, false, {
                     fileName: "src/pages/HospitalDashboard.js",
-                    lineNumber: 1718,
+                    lineNumber: 1712,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 1717,
+                lineNumber: 1711,
                 columnNumber: 7
             }, undefined),
             showRequestModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37234,7 +37242,7 @@ const HospitalDashboard = ()=>{
                         onClick: ()=>setShowRequestModal(false)
                     }, void 0, false, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1724,
+                        lineNumber: 1718,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37247,20 +37255,20 @@ const HospitalDashboard = ()=>{
                                         children: "\uD83D\uDEA8"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1728,
+                                        lineNumber: 1722,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                         children: "New Emergency Blood Sourcing"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1729,
+                                        lineNumber: 1723,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1727,
+                                lineNumber: 1721,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -37268,7 +37276,7 @@ const HospitalDashboard = ()=>{
                                 children: "Broadcast push notification to active nearby donors"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1731,
+                                lineNumber: 1725,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -37282,7 +37290,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Patient Name"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1735,
+                                                lineNumber: 1729,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37297,13 +37305,13 @@ const HospitalDashboard = ()=>{
                                                 className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1736,
+                                                lineNumber: 1730,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1734,
+                                        lineNumber: 1728,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37316,7 +37324,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Target Ward / Room"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1748,
+                                                        lineNumber: 1742,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37331,13 +37339,13 @@ const HospitalDashboard = ()=>{
                                                         className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1749,
+                                                        lineNumber: 1743,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1747,
+                                                lineNumber: 1741,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37347,7 +37355,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Required Blood"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1759,
+                                                        lineNumber: 1753,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -37371,24 +37379,24 @@ const HospitalDashboard = ()=>{
                                                                 children: t
                                                             }, t, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1766,
+                                                                lineNumber: 1760,
                                                                 columnNumber: 23
                                                             }, undefined))
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1760,
+                                                        lineNumber: 1754,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1758,
+                                                lineNumber: 1752,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1746,
+                                        lineNumber: 1740,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37401,7 +37409,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Required Units (Bags)"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1774,
+                                                        lineNumber: 1768,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37416,13 +37424,13 @@ const HospitalDashboard = ()=>{
                                                         className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1775,
+                                                        lineNumber: 1769,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1773,
+                                                lineNumber: 1767,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37432,7 +37440,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Urgency Level"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1785,
+                                                        lineNumber: 1779,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -37448,7 +37456,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "\uD83D\uDEA8 Critical Priority"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1791,
+                                                                lineNumber: 1785,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37456,7 +37464,7 @@ const HospitalDashboard = ()=>{
                                                                 children: "\u26A1 Moderate Priority"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1792,
+                                                                lineNumber: 1786,
                                                                 columnNumber: 21
                                                             }, undefined),
                                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("option", {
@@ -37464,25 +37472,25 @@ const HospitalDashboard = ()=>{
                                                                 children: "\uD83D\uDFE2 Standard Priority"
                                                             }, void 0, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1793,
+                                                                lineNumber: 1787,
                                                                 columnNumber: 21
                                                             }, undefined)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1786,
+                                                        lineNumber: 1780,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1784,
+                                                lineNumber: 1778,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1772,
+                                        lineNumber: 1766,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37492,7 +37500,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Emergency Medical Details"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1799,
+                                                lineNumber: 1793,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("textarea", {
@@ -37506,13 +37514,13 @@ const HospitalDashboard = ()=>{
                                                 className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1800,
+                                                lineNumber: 1794,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1798,
+                                        lineNumber: 1792,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37525,7 +37533,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Cancel"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1810,
+                                                lineNumber: 1804,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -37534,31 +37542,31 @@ const HospitalDashboard = ()=>{
                                                 children: "\u26A1 Send Broadcast"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1817,
+                                                lineNumber: 1811,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1809,
+                                        lineNumber: 1803,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1733,
+                                lineNumber: 1727,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1726,
+                        lineNumber: 1720,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 1723,
+                lineNumber: 1717,
                 columnNumber: 9
             }, undefined),
             showAddStockModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37569,7 +37577,7 @@ const HospitalDashboard = ()=>{
                         onClick: ()=>setShowAddStockModal(false)
                     }, void 0, false, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1832,
+                        lineNumber: 1826,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37582,20 +37590,20 @@ const HospitalDashboard = ()=>{
                                         children: "\uD83D\uDCE5"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1836,
+                                        lineNumber: 1830,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
                                         children: "Log Incoming Blood Units"
                                     }, void 0, false, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1837,
+                                        lineNumber: 1831,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1835,
+                                lineNumber: 1829,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -37603,7 +37611,7 @@ const HospitalDashboard = ()=>{
                                 children: "Register external supply batch into inventory"
                             }, void 0, false, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1839,
+                                lineNumber: 1833,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -37620,7 +37628,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Blood Type"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1844,
+                                                        lineNumber: 1838,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("select", {
@@ -37644,18 +37652,18 @@ const HospitalDashboard = ()=>{
                                                                 children: t
                                                             }, t, false, {
                                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                                lineNumber: 1851,
+                                                                lineNumber: 1845,
                                                                 columnNumber: 23
                                                             }, undefined))
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1845,
+                                                        lineNumber: 1839,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1843,
+                                                lineNumber: 1837,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37665,7 +37673,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Units (Bags)"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1856,
+                                                        lineNumber: 1850,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37681,19 +37689,19 @@ const HospitalDashboard = ()=>{
                                                         className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1857,
+                                                        lineNumber: 1851,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1855,
+                                                lineNumber: 1849,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1842,
+                                        lineNumber: 1836,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37706,7 +37714,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Source / Donor ID"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1871,
+                                                        lineNumber: 1865,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37720,13 +37728,13 @@ const HospitalDashboard = ()=>{
                                                         className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1872,
+                                                        lineNumber: 1866,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1870,
+                                                lineNumber: 1864,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37736,7 +37744,7 @@ const HospitalDashboard = ()=>{
                                                         children: "Expiration Window (Days)"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1881,
+                                                        lineNumber: 1875,
                                                         columnNumber: 19
                                                     }, undefined),
                                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -37751,19 +37759,19 @@ const HospitalDashboard = ()=>{
                                                         className: "w-full px-4 py-3 bg-slate-50 border border-slate-200 focus:outline-none focus:ring-1 focus:ring-red-500 rounded-xl text-sm text-slate-800"
                                                     }, void 0, false, {
                                                         fileName: "src/pages/HospitalDashboard.js",
-                                                        lineNumber: 1882,
+                                                        lineNumber: 1876,
                                                         columnNumber: 19
                                                     }, undefined)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1880,
+                                                lineNumber: 1874,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1869,
+                                        lineNumber: 1863,
                                         columnNumber: 15
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37776,7 +37784,7 @@ const HospitalDashboard = ()=>{
                                                 children: "Cancel"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1894,
+                                                lineNumber: 1888,
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -37785,37 +37793,37 @@ const HospitalDashboard = ()=>{
                                                 children: "\u2713 Log Supply"
                                             }, void 0, false, {
                                                 fileName: "src/pages/HospitalDashboard.js",
-                                                lineNumber: 1901,
+                                                lineNumber: 1895,
                                                 columnNumber: 17
                                             }, undefined)
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/pages/HospitalDashboard.js",
-                                        lineNumber: 1893,
+                                        lineNumber: 1887,
                                         columnNumber: 15
                                     }, undefined)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/pages/HospitalDashboard.js",
-                                lineNumber: 1841,
+                                lineNumber: 1835,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/pages/HospitalDashboard.js",
-                        lineNumber: 1834,
+                        lineNumber: 1828,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/pages/HospitalDashboard.js",
-                lineNumber: 1831,
+                lineNumber: 1825,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/pages/HospitalDashboard.js",
-        lineNumber: 692,
+        lineNumber: 686,
         columnNumber: 5
     }, undefined);
 };
@@ -37834,6 +37842,6 @@ $RefreshReg$(_c, "HospitalDashboard");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/Footer":"lq1kZ","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"irmnC":[function() {},{}]},["ieapP","a0t4e"], "a0t4e", "parcelRequire45c8", {}, "./", "/", "http://localhost:1234")
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","react-router-dom":"61z4w","../components/Footer":"lq1kZ","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"irmnC":[function() {},{}]},["juuAP","a0t4e"], "a0t4e", "parcelRequire45c8", {}, "./", "/", "http://localhost:6607")
 
 //# sourceMappingURL=LifeLink.31b563d9.js.map

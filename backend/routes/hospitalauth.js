@@ -59,7 +59,12 @@ router.post('/register', async (req, res) => {
       hospital: {
         id: newHospital._id,
         name: newHospital.name,
-        email: newHospital.email
+        email: newHospital.email,
+        licenseId: newHospital.licenseId,
+        adminName: newHospital.adminName,
+        address: newHospital.address,
+        city: newHospital.city,
+        phone: newHospital.phone
       }
     });
   } catch (error) {
@@ -104,7 +109,12 @@ router.post('/login', async (req, res) => {
       hospital: {
         id: hospital._id,
         name: hospital.name,
-        email: hospital.email
+        email: hospital.email,
+        licenseId: hospital.licenseId,
+        adminName: hospital.adminName,
+        address: hospital.address,
+        city: hospital.city,
+        phone: hospital.phone
       }
     });
   } catch (error) {
