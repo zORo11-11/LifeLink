@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-
-// Imports the Mongoose Model
+const jwt = require('jsonwebtoken');
 const Hospital = require('../models/Hospitals');
+const { JWT_SECRET } = require('../middleware/auth');
 
+// ==========================================
+// 1. HOSPITAL REGISTRATION
+// ==========================================
 router.post('/register', async (req, res) => {
   try {
     const {
@@ -26,8 +29,10 @@ router.post('/register', async (req, res) => {
       });
     }
 
+    const cleanEmail = email.toLowerCase().trim();
+
     // Check for existing hospital
-    const existingHospital = await Hospital.findOne({ email });
+    const existingHospital = await Hospital.findOne({ email: cleanEmail });
     if (existingHospital) {
       return res.status(400).json({
         success: false,
@@ -42,33 +47,43 @@ router.post('/register', async (req, res) => {
     // Create document mapping hospitalName -> name
     const newHospital = new Hospital({
       name: hospitalName || name || 'Unnamed Hospital',
-      licenseId,
-      adminName,
-      email,
+      licenseId: licenseId || `HOSP-${Math.floor(10000 + Math.random() * 90000)}`,
+      adminName: adminName || 'Administrator',
+      email: cleanEmail,
       password: hashedPassword,
-      address,
-      city,
-      phone
+      address: address || '',
+      city: city || '',
+      phone: phone || ''
     });
 
     await newHospital.save();
 
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: newHospital._id, role: 'hospital', email: newHospital.email },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    const hospitalData = {
+      id: newHospital._id,
+      _id: newHospital._id,
+      name: newHospital.name,
+      email: newHospital.email,
+      licenseId: newHospital.licenseId,
+      adminName: newHospital.adminName,
+      address: newHospital.address,
+      city: newHospital.city,
+      phone: newHospital.phone
+    };
+
     res.status(201).json({
       success: true,
       message: 'Hospital registered successfully!',
-      hospital: {
-        id: newHospital._id,
-        name: newHospital.name,
-        email: newHospital.email,
-        licenseId: newHospital.licenseId,
-        adminName: newHospital.adminName,
-        address: newHospital.address,
-        city: newHospital.city,
-        phone: newHospital.phone
-      }
+      token,
+      hospital: hospitalData
     });
   } catch (error) {
-    console.error('SERVER CRASH DETAILS:', error); // Prints exact error in Node Terminal
     res.status(500).json({
       success: false,
       message: error.message || 'Server error during registration'
@@ -76,6 +91,9 @@ router.post('/register', async (req, res) => {
   }
 });
 
+// ==========================================
+// 2. HOSPITAL LOGIN
+// ==========================================
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -87,7 +105,7 @@ router.post('/login', async (req, res) => {
       });
     }
 
-    const hospital = await Hospital.findOne({ email });
+    const hospital = await Hospital.findOne({ email: email.toLowerCase().trim() });
     if (!hospital) {
       return res.status(400).json({
         success: false,
@@ -103,22 +121,32 @@ router.post('/login', async (req, res) => {
       });
     }
 
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: hospital._id, role: 'hospital', email: hospital.email },
+      JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    const hospitalData = {
+      id: hospital._id,
+      _id: hospital._id,
+      name: hospital.name,
+      email: hospital.email,
+      licenseId: hospital.licenseId,
+      adminName: hospital.adminName,
+      address: hospital.address,
+      city: hospital.city,
+      phone: hospital.phone
+    };
+
     res.status(200).json({
       success: true,
       message: 'Login successful',
-      hospital: {
-        id: hospital._id,
-        name: hospital.name,
-        email: hospital.email,
-        licenseId: hospital.licenseId,
-        adminName: hospital.adminName,
-        address: hospital.address,
-        city: hospital.city,
-        phone: hospital.phone
-      }
+      token,
+      hospital: hospitalData
     });
   } catch (error) {
-    console.error('LOGIN ERROR DETAILS:', error);
     res.status(500).json({
       success: false,
       message: error.message || 'Server error during login'

@@ -47,10 +47,60 @@ const DonorSchema = new mongoose.Schema({
     type: Date,
     default: null
   },
+  lastDonated:{
+    type: Date,
+    default: null
+  },
+  lastDonatedDate:{
+    type: Date,
+    default: null
+  },
+  totalDonations:{
+    type: Number,
+    default: 0
+  },
   isAvailable:{
     type: Boolean,
     default: true
+  },
+  liveStatus: {
+    type: String,
+    enum: ['Pending', 'In Transit', 'In-Transit', 'Accepted', 'Reached', 'Arrived', 'Completed', 'Cancelled'],
+    default: 'Pending'
+  },
+  currentLocationStatus: {
+    type: String,
+    default: 'Not Started'
+  },
+  estimatedArrival: {
+    type: String,
+    default: 'N/A'
+  },
+  assignedRequestId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'BloodRequest',
+    default: null
+  },
+  trackingLogs: [
+    {
+      status: { type: String, required: true },
+      timestamp: { type: Date, default: Date.now },
+      notes: { type: String, default: '' }
+    }
+  ],
+  location: {
+    type: {
+      type: String,
+      enum: ['Point'],
+      default: 'Point'
+    },
+    coordinates: {
+      type: [Number], // [longitude, latitude]
+      default: [0, 0]
+    }
   }
-},{timestamps: true});
+},{timestamps: true, strict: false});
+
+DonorSchema.index({ location: '2dsphere' });
 
 module.exports = mongoose.model('Donor', DonorSchema);

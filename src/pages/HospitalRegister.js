@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import FormInput from '../components/FormInput';
+import Button from '../components/Button';
 import Footer from '../components/Footer';
 
 const HospitalRegister = () => {
@@ -23,30 +25,67 @@ const HospitalRegister = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.hospitalName) newErrors.hospitalName = 'Hospital name is required';
-    if (!formData.licenseId) newErrors.licenseId = 'License ID is required';
-    if (!formData.adminName) newErrors.adminName = 'Admin name is required';
-
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email format is invalid';
+    // Hospital Name validation (no numbers allowed)
+    if (!formData.hospitalName.trim()) {
+      newErrors.hospitalName = 'Hospital name is required';
+    } else if (/\d/.test(formData.hospitalName)) {
+      newErrors.hospitalName = 'Hospital name cannot contain numbers';
     }
 
+    // License / Registration Number validation
+    if (!formData.licenseId.trim()) {
+      newErrors.licenseId = 'License / Registration ID is required';
+    }
+
+    // Contact Person Name validation (no numbers allowed)
+    if (!formData.adminName.trim()) {
+      newErrors.adminName = 'Contact person name is required';
+    } else if (/\d/.test(formData.adminName)) {
+      newErrors.adminName = 'Contact person name cannot contain numbers';
+    }
+
+    // Official Email Format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = 'Official email is required';
+    } else if (!emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid official email format';
+    }
+
+    // 10-Digit Emergency Contact Phone validation (Regex: /^[0-9]{10}$/)
+    const cleanPhone = formData.phone.replace(/[\s\-\(\)]/g, '');
+    if (!cleanPhone) {
+      newErrors.phone = '10-digit emergency contact phone is required';
+    } else if (!/^[0-9]{10}$/.test(cleanPhone)) {
+      newErrors.phone = 'Emergency contact phone must be exactly 10 digits';
+    }
+
+    // Location Address validation
+    if (!formData.address.trim()) {
+      newErrors.address = 'Location address is required';
+    }
+
+    // City validation
+    if (!formData.city.trim()) {
+      newErrors.city = 'City is required';
+    }
+
+    // Password validation (min 8 chars & combination of letters and numbers)
+    const passwordComboRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])/;
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+    } else if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters long';
+    } else if (!passwordComboRegex.test(formData.password)) {
+      newErrors.password = 'Password must contain a combination of letters and numbers';
     }
 
+    // Confirm password matching
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match';
     }
-
-    if (!formData.address) newErrors.address = 'Address is required';
-    if (!formData.city) newErrors.city = 'City is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -58,224 +97,231 @@ const HospitalRegister = () => {
       ...prev,
       [name]: value
     }));
+    // Clear field error as user types
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: undefined
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (validateForm()) {
-      setLoading(true);
+    // Prevent default form submission if any field fails validation
+    if (!validateForm()) {
+      return;
+    }
 
-      try {
-        const response = await fetch('http://localhost:5000/api/hospitals/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
+    setLoading(true);
+    setErrors({});
 
-        const data = await response.json();
+    try {
+      const response = await fetch('http://localhost:5000/api/hospitals/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          phone: formData.phone.replace(/[\s\-\(\)]/g, '')
+        })
+      });
 
-        if (response.ok && data.success) {
-          setLoading(false);
-          setSuccess(true);
-          setTimeout(() => {
-            navigate('/login/hospital');
-          }, 1500);
-        } else {
-          setLoading(false);
-          alert(data.message || 'Hospital registration failed.');
-        }
-      } catch (error) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setLoading(false);
-        console.error('Registration error:', error);
-        alert('Cannot connect to server. Ensure backend is running at http://localhost:5000');
+        setSuccess(true);
+        setTimeout(() => {
+          navigate('/login/hospital');
+        }, 1500);
+      } else {
+        setLoading(false);
+        setErrors({ server: data.message || 'Hospital registration failed.' });
       }
+    } catch (error) {
+      setLoading(false);
+      console.error('Registration error:', error);
+      setErrors({ server: 'Cannot connect to server. Ensure backend is running at http://localhost:5000' });
     }
   };
 
   return (
-<div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800">      <div className="max-w-2xl w-full space-y-8">
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-[#1E3A8A]">
+    <div className="min-h-screen flex flex-col justify-between bg-slate-50 text-slate-800">
+      
+      {/* Centered Main Layout */}
+      <main 
+        className="flex-1 flex items-center justify-center px-4 py-8 sm:py-12 w-full"
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 200px)' }}
+      >
+        {/* Form Container (max-width 550px centered) */}
+        <div 
+          className="w-full bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8 my-auto transition-all duration-300"
+          style={{ maxWidth: '550px', margin: '0 auto' }}
+        >
+          <div className="text-center mb-6">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-100 text-blue-600 mb-3">
+              🏥
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               Register Hospital Account
             </h2>
-            <p className="text-[#64748B] mt-2">
+            <p className="text-slate-500 text-sm mt-1">
               Create your hospital administration account
             </p>
           </div>
 
           {success && (
-            <div className="mb-4 p-3 bg-green-500 bg-opacity-10 border border-green-500 text-green-700 rounded-lg text-center">
-              Registration successful! Redirecting to login...
+            <div className="mb-6 p-4 bg-emerald-50 border border-emerald-300 text-emerald-800 rounded-xl text-center text-sm font-semibold flex items-center justify-center gap-2">
+              <span>✓</span> Registration successful! Redirecting to login...
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Hospital Name *
-                </label>
-                <input
-                  type="text"
-                  name="hospitalName"
-                  value={formData.hospitalName}
-                  onChange={handleChange}
-                  placeholder="City General Hospital"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.hospitalName && <p className="text-red-500 text-xs mt-1">{errors.hospitalName}</p>}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  License / Reg ID *
-                </label>
-                <input
-                  type="text"
-                  name="licenseId"
-                  value={formData.licenseId}
-                  onChange={handleChange}
-                  placeholder="HOSP-12345"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.licenseId && <p className="text-red-500 text-xs mt-1">{errors.licenseId}</p>}
-              </div>
+          {errors.server && (
+            <div className="mb-6 p-4 bg-red-50 border border-red-300 text-red-700 rounded-xl text-center text-sm font-medium">
+              ⚠ {errors.server}
             </div>
+          )}
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Admin Full Name *
-                </label>
-                <input
-                  type="text"
-                  name="adminName"
-                  value={formData.adminName}
-                  onChange={handleChange}
-                  placeholder="Dr. Jane Smith"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.adminName && <p className="text-red-500 text-xs mt-1">{errors.adminName}</p>}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Official Email *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="admin@hospital.com"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Password *
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder="••••••••"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Confirm Password *
-                </label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  placeholder="••••••••"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Address *
-              </label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
+          <form onSubmit={handleSubmit} noValidate className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormInput
+                label="Hospital Name"
+                name="hospitalName"
+                value={formData.hospitalName}
                 onChange={handleChange}
-                placeholder="123 Medical Center Drive"
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                error={errors.hospitalName}
+                required
+                placeholder="City General Hospital"
+                theme="admin"
               />
-              {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
+
+              <FormInput
+                label="License / Reg ID"
+                name="licenseId"
+                value={formData.licenseId}
+                onChange={handleChange}
+                error={errors.licenseId}
+                required
+                placeholder="HOSP-12345"
+                theme="admin"
+              />
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  City *
-                </label>
-                <input
-                  type="text"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  placeholder="New York"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormInput
+                label="Contact Person Name"
+                name="adminName"
+                value={formData.adminName}
+                onChange={handleChange}
+                error={errors.adminName}
+                required
+                placeholder="Dr. Jane Smith"
+                theme="admin"
+              />
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="+1 555-0199"
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+              <FormInput
+                label="Official Email Format"
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                error={errors.email}
+                required
+                placeholder="admin@hospital.com"
+                theme="admin"
+              />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-200 disabled:opacity-50"
-            >
-              {loading ? 'Registering...' : 'Register Hospital Account'}
-            </button>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormInput
+                label="Password (min 8 chars)"
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                error={errors.password}
+                required
+                placeholder="••••••••"
+                theme="admin"
+              />
+
+              <FormInput
+                label="Confirm Password"
+                type="password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                error={errors.confirmPassword}
+                required
+                placeholder="••••••••"
+                theme="admin"
+              />
+            </div>
+
+            <FormInput
+              label="Location Address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              error={errors.address}
+              required
+              placeholder="123 Medical Center Drive"
+              theme="admin"
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormInput
+                label="City"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                error={errors.city}
+                required
+                placeholder="New York"
+                theme="admin"
+              />
+
+              <FormInput
+                label="10-Digit Emergency Phone"
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                error={errors.phone}
+                required
+                placeholder="9876543210"
+                theme="admin"
+              />
+            </div>
+
+            <div className="pt-2">
+              <Button 
+                type="submit" 
+                variant="primary" 
+                loading={loading}
+                className="w-full py-3 text-white font-semibold rounded-xl bg-blue-600 hover:bg-blue-700 shadow-md transition-all duration-200"
+              >
+                Register Hospital Account
+              </Button>
+            </div>
           </form>
 
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+          <div className="mt-6 text-center pt-4 border-t border-slate-100">
+            <p className="text-sm text-slate-600">
               Already registered?{' '}
-              <Link to="/login/hospital" className="font-medium text-blue-600 hover:underline">
+              <Link 
+                to="/login/hospital" 
+                className="font-bold text-blue-600 hover:text-blue-700 underline decoration-blue-300 hover:decoration-blue-600 transition-colors"
+              >
                 Login Here
               </Link>
             </p>
           </div>
         </div>
-      </div>
-      <div className="w-full m-0 p-0"> 
-        <Footer /> 
-      </div> 
+      </main>
+
+      <Footer />
     </div>
   );
 };

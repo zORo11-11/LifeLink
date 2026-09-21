@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node tests/organMatching.test.js && node tests/organLogistics.test.js && node tests/organPhase4.test.js",
+    "test:unit": "node tests/organMatching.test.js && node tests/organLogistics.test.js",
+    "test:phase4": "node tests/organPhase4.test.js",
     "start": "node server.js"
   },
   "keywords": [],
@@ -16,6 +18,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.8.0"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.8.0",
+    "socket.io": "^4.7.5"
   }
 }

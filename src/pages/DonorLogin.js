@@ -1,10 +1,13 @@
 import React, { useState } from 'react'; 
 import { Link, useNavigate } from 'react-router-dom'; 
+import { useAuth } from '../context/AuthContext';
+import { api } from '../services/api';
 import Button from '../components/Button'; 
 import Footer from '../components/Footer'; 
 
 const DonorLogin = () => { 
   const navigate = useNavigate(); 
+  const { login } = useAuth();
   const [formData, setFormData] = useState({ phoneOrEmail: '', password: '' }); 
   const [errors, setErrors] = useState({}); 
   const [loading, setLoading] = useState(false); 
@@ -30,22 +33,17 @@ const DonorLogin = () => {
     if (validateForm()) { 
       setLoading(true); 
       try { 
-        const response = await fetch('http://localhost:5000/api/donors/login', { 
-          method: 'POST', 
-          headers: { 'Content-Type': 'application/json' }, 
-          body: JSON.stringify({ 
-            email: formData.phoneOrEmail, 
-            password: formData.password, 
-          }), 
+        const data = await api.post('/api/donors/login', {
+          email: formData.phoneOrEmail, 
+          password: formData.password, 
         }); 
-        const data = await response.json(); 
-        if (response.ok && data.success) { 
+        if (data.success && data.donor) { 
           setLoading(false); 
           setSuccess(true); 
-          localStorage.setItem('donor', JSON.stringify(data.donor)); 
+          login(data.donor, data.token, 'donor'); 
           setTimeout(() => { 
             navigate('/dashboard/donor'); 
-          }, 1200); 
+          }, 800); 
         } else { 
           setLoading(false); 
           alert(data.message || 'Invalid email or password.'); 
